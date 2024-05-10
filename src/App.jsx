@@ -1,12 +1,15 @@
-import './App.css';
 import React from 'react';
 import GlobalStyles from './styles/GlobalStyle';
+import theme from './styles/theme';
+import { ThemeProvider } from 'styled-components';
 
 function App() {
  
   return (
     <>
-      <GlobalStyles />
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+      </ThemeProvider>
     </>
   )
 }
