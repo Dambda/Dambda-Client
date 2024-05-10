@@ -1,4 +1,6 @@
-export const exampleStyle = () => {
-    return "HELLO WORLD";
+const exampleStyle = () => {
+    "HELLO WORLD";
     // styled-components 파일 분리
 }
+
+export default exampleStyle;

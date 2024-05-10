@@ -1,3 +1,5 @@
-export const exampleConstant = () => {
+const exampleConstant = () => {
     return "HELLO WORLD"
 }
+
+export default exampleConstant;
