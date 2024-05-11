@@ -22,7 +22,7 @@ const fadeIn = keyframes`
 const Container = styled.div`
   height: 100vh;
   padding: 140px 20px;
-  border: 1px solid black;
+  background-color : ${theme.color.white};
   position: absolute;
   z-index: 2;
 
