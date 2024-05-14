@@ -20,10 +20,10 @@ const fadeIn = keyframes`
 `;
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   padding: 140px 20px;
   background-color : ${theme.color.white};
-  position: absolute;
+  position: fixed;
   z-index: 2;
 
   ${(props) =>
