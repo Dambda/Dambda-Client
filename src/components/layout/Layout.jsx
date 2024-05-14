@@ -12,7 +12,7 @@ const Layout = () => {
         <>
             <div style={{display : "flex", width : "100%"}}>
                 {true && <Menu isFold={isFold} setFold={setIsFold}/>}
-                <div style={{width : "100vw", backgroundColor : "#F8F8F6"}}>
+                <div style={{width : "100%", backgroundColor : "#F8F8F6"}}>
                     <Header/>
                     <div style={{width : "100vw"}}>
                         <Outlet />
