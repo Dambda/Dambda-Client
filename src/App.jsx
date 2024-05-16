@@ -25,7 +25,7 @@ function App() {
             <Route path="/program" element={<ProgramPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/statistics" element={<StatisticsPage />} />
-            <Route path="/write" element={<WritePage />} />
+            <Route path="/writing" element={<WritePage />} />
           </Route>
         </Routes>
         </BrowserRouter>
