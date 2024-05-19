@@ -9,7 +9,7 @@ import HomePage from './pages/HomePage';
 import ProgramPage from './pages/ProgramPage';
 import SearchPage from './pages/SearchPage';
 import StatisticsPage from './pages/StatisticsPage';
-import WritePage from './pages/WritePage';
+import WritingPage from './pages/WritingPage';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
               <Route path="/program" element={<ProgramPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/statistics" element={<StatisticsPage />} />
-              <Route path="/writing" element={<WritePage />} />
+              <Route path="/writing" element={<WritingPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
