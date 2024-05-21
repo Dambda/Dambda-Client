@@ -2,17 +2,17 @@ import React from 'react';
 import GlobalStyles from './styles/GlobalStyle';
 import theme from './styles/theme';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import CalendarPage from './pages/CalendarPage';
 import HomePage from './pages/HomePage';
 import ProgramPage from './pages/ProgramPage';
 import SearchPage from './pages/SearchPage';
 import StatisticsPage from './pages/StatisticsPage';
-import WritePage from './pages/WritePage';
+import WritingPage from './pages/WritingPage';
 import CalendarDetailPage from './pages/CalendarDetailPage';
+
 function App() {
-  
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -26,14 +26,13 @@ function App() {
             <Route path="/program" element={<ProgramPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/statistics" element={<StatisticsPage />} />
-            <Route path="/write" element={<WritePage />} />
+            <Route path="/writing" element={<WritingPage />} />
           </Route>
         </Routes>
         </BrowserRouter>
-
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
