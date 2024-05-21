@@ -8,7 +8,7 @@ const Conatiner = styled.div`
     align-items: center;
     padding: 20px 70px;
     background-color: ${theme.color.white};
-    border: 0.1px solid ${theme.color.gray20};
+    border: 0.1px solid #eaeaea;
     border-radius: 20px;
     &:hover {
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
