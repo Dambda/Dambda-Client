@@ -10,6 +10,7 @@ import ProgramPage from './pages/ProgramPage';
 import SearchPage from './pages/SearchPage';
 import StatisticsPage from './pages/StatisticsPage';
 import WritingPage from './pages/WritingPage';
+import CalendarDetailPage from './pages/CalendarDetailPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/calendar" element={<CalendarPage />} />
+            <Route path='/calendar/detail/:date' element={<CalendarDetailPage />}/>
             <Route path="/" element={<HomePage />} />
             <Route path="/program" element={<ProgramPage />} />
             <Route path="/search" element={<SearchPage />} />
