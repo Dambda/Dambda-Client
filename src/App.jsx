@@ -17,16 +17,16 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/calendar" element={<CalendarPage />} />
-              <Route path="/" element={<HomePage />} />
-              <Route path="/program" element={<ProgramPage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/statistics" element={<StatisticsPage />} />
-              <Route path="/writing" element={<WritingPage />} />
-            </Route>
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/program" element={<ProgramPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/statistics" element={<StatisticsPage />} />
+            <Route path="/writing" element={<WritingPage />} />
+          </Route>
+        </Routes>
         </BrowserRouter>
       </ThemeProvider>
     </>
