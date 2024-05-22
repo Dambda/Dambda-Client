@@ -9,7 +9,6 @@ const Template = () => {
 
   const handleClick = () => {
     setDropdownView((prev) => !prev);
-    console.log(dropdownView);
   };
 
   const handleClosedClick = () => {
@@ -23,8 +22,8 @@ const Template = () => {
           <span>주제</span>
           <img src={topic}></img>
         </div>
-        <Styled.Template>
-          <button onClick={handleClick}>템플릿</button>
+        <Styled.Template onClick={handleClick}>
+          <button>템플릿</button>
           <img src={template}></img>
         </Styled.Template>
       </Styled.TemplateContainer>

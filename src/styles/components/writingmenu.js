@@ -32,11 +32,12 @@ const TemplateContainer = styled.div`
 `;
 
 const Template = styled.div`
+  cursor: pointer;
   & button {
+    cursor: pointer;
     font-size: 14px;
     border: none;
     background-color: ${theme.color.white};
-    cursor: pointer;
   }
 `;
 
