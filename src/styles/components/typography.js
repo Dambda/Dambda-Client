@@ -23,6 +23,7 @@ const Fonts = styled.button`
   margin-right: 12px;
   border: none;
   background-color: ${theme.color.white};
+  cursor: pointer;
 
   & span {
     margin-right: 4px;

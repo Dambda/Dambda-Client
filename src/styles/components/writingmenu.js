@@ -31,4 +31,13 @@ const TemplateContainer = styled.div`
   }
 `;
 
-export default { Container, TemplateContainer };
+const Template = styled.div`
+  & button {
+    font-size: 14px;
+    border: none;
+    background-color: ${theme.color.white};
+    cursor: pointer;
+  }
+`;
+
+export default { Container, TemplateContainer, Template };
