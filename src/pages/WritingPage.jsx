@@ -4,6 +4,7 @@ import WritingMenu from '../components/writing/WritingMenu';
 import Conatiner from '@/styles/pages/writingpage';
 import WritingInput from '../components/writing/WritingInput';
 import backwardBtn from '@/assets/icon/backwardBtn.svg';
+import WritingEtc from '../components/writing/WritingEtc';
 
 const WritingPage = () => {
   return (
@@ -14,6 +15,7 @@ const WritingPage = () => {
       </Link>
       <WritingMenu />
       <WritingInput />
+      <WritingEtc />
     </Conatiner>
   );
 };

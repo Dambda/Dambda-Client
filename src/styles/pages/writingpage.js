@@ -9,7 +9,7 @@ const Container = styled.div`
 
   & .backward-btn {
     position: relative;
-    top: -6px;
+    top: -15px;
     left: 156px;
     cursor: pointer;
   }

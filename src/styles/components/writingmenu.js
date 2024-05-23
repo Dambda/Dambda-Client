@@ -41,4 +41,21 @@ const Template = styled.div`
   }
 `;
 
-export default { Container, TemplateContainer, Template };
+const EtcContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 72px;
+  left: 569px;
+  width: 301px;
+  height: 48px;
+  border-radius: 6px;
+  border: 1px solid #eaeaea;
+
+  & img {
+    cursor: pointer;
+  }
+`;
+
+export default { Container, TemplateContainer, Template, EtcContainer };
