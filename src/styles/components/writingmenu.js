@@ -45,7 +45,7 @@ const EtcContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 72px;
   left: 569px;
   width: 301px;
