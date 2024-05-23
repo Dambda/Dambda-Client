@@ -15,6 +15,7 @@ const Typography = () => {
 
   const handleFontType = (item) => {
     setFontType(item);
+    setFontsView(false);
   };
 
   const handleFontClick = () => {

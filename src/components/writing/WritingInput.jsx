@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Input from '../../styles/components/writinginput';
+import Styled from '../../styles/components/writinginput';
+import completedIcon from '@/assets/icon/completed-icon.svg';
 
 const WritingInput = () => {
   const [value, setValue] = useState('');
@@ -11,12 +12,16 @@ const WritingInput = () => {
 
   return (
     <form>
-      <Input
+      <Styled.Input
         name="content"
         value={value}
         onChange={handleInput}
         placeholder="OO님의 오늘 하루 이야기를 작성해주세요"
       />
+      <Styled.CompletedBtn>
+        <span>작성완료</span>
+        <img src={completedIcon} />
+      </Styled.CompletedBtn>
     </form>
   );
 };
