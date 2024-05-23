@@ -29,6 +29,16 @@ const TemplateContainer = styled.div`
     font-size: 14px;
     margin-right: 4px;
   }
+
+  & .topic-menu,
+  .template-menu {
+    cursor: pointer;
+  }
+
+  & .topic-menu:hover,
+  .template-menu:hover {
+    font-weight: 700;
+  }
 `;
 
 const Template = styled.div`
