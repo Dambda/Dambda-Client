@@ -91,19 +91,19 @@ const TemplateItemContainer = styled.div`
   & div {
     display: flex;
     flex-direction: column;
-    padding: 11px 10px;
+    padding: 10px;
   }
 
   & .template-name {
     display: inline-block;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
     font-size: 12px;
     font-weight: 700;
     color: ${theme.color.primary};
   }
 
   & .template-content {
-    font-size: 12px;
+    font-size: 11px;
     color: ${theme.color.black};
   }
 `;
