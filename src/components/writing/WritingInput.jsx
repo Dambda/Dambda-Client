@@ -2,8 +2,13 @@ import { useState } from 'react';
 import Styled from '../../styles/components/writinginput';
 import completedIcon from '@/assets/icon/completed-icon.svg';
 
-const WritingInput = () => {
+const WritingInput = ({ onSubmit }) => {
   const [value, setValue] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(true);
+  };
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -11,7 +16,7 @@ const WritingInput = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Styled.Input
         name="content"
         value={value}
