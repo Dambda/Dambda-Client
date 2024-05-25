@@ -23,14 +23,18 @@ const ModalContainer = styled.div`
   background-color: ${theme.color.white};
 
   & .loading-spinner {
+    position: absolute;
+    top: 210px;
+    left: 348px;
     width: 48px;
     height: 48px;
+    /* margin: auto; */
     border: 5px solid #8594c0;
     border-bottom-color: #47588c;
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+    animation: rotation 1.5s linear infinite;
 
     @keyframes rotation {
       0% {
@@ -43,6 +47,9 @@ const ModalContainer = styled.div`
   }
 
   & span {
+    position: absolute;
+    top: 297px;
+    left: 105px;
     font-size: 20px;
     font-weight: 700;
   }
@@ -50,9 +57,15 @@ const ModalContainer = styled.div`
   & .closed-btn {
     width: 24px;
     height: auto;
+    position: absolute;
+    top: 40px;
+    right: 72px;
   }
 
   & .cancel {
+    position: absolute;
+    bottom: 53px;
+    left: 326px;
     width: 92px;
     height: 40px;
     padding: 8px 16px;
