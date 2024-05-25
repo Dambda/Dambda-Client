@@ -10,8 +10,8 @@ const SelectionModal = ({ onClick }) => {
   };
   return (
     <Styled.Container>
-      <Styled.ModalContainer>
-        <img onClick={handleModal} className="closed-btn" src={closedBtn} />
+      <img onClick={handleModal} className="closed-btn" src={closedBtn} />
+      <Styled.SelectionContainer>
         <div className="content">
           <div className="header">
             <h2>본인이 생각하는 오늘의 감정과 주제를 선택해주세요</h2>
@@ -21,16 +21,18 @@ const SelectionModal = ({ onClick }) => {
             </span>
           </div>
 
-          <div className="select-emotion">
-            <h3>감정</h3>
-            <span>최대 5개까지 선택 가능합니다</span>
-            {/* <SelectionList items={mockData.emotions} /> */}
-          </div>
+          <div className="select">
+            <div className="select-emotion">
+              <h3>감정</h3>
+              <span>최대 5개까지 선택 가능합니다</span>
+              {/* <SelectionList items={mockData.emotions} /> */}
+            </div>
 
-          <div className="select-topic">
-            <h3>주제</h3>
-            <span>최대 5개까지 선택 가능합니다</span>
-            {/* <SelectionList items={mockData.topics} /> */}
+            <div className="select-topic">
+              <h3>주제</h3>
+              <span>최대 5개까지 선택 가능합니다</span>
+              {/* <SelectionList items={mockData.topics} /> */}
+            </div>
           </div>
         </div>
 
@@ -38,7 +40,7 @@ const SelectionModal = ({ onClick }) => {
           <button className="unselected-btn">미선택</button>
           <button className="selection-complete-btn">선택 완료</button>
         </div>
-      </Styled.ModalContainer>
+      </Styled.SelectionContainer>
     </Styled.Container>
   );
 };

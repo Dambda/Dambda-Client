@@ -13,7 +13,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const ModalContainer = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -22,6 +22,17 @@ const ModalContainer = styled.div`
   height: 468px;
   background-color: ${theme.color.white};
 
+  & .closed-btn {
+    position: absolute;
+    top: 40px;
+    right: 72px;
+    width: 24px;
+    height: auto;
+    cursor: pointer;
+  }
+`;
+
+const LoadingContainer = styled(ContentContainer)`
   & .loading-spinner {
     position: absolute;
     top: 210px;
@@ -49,15 +60,6 @@ const ModalContainer = styled.div`
     font-weight: 700;
   }
 
-  & .closed-btn {
-    position: absolute;
-    top: 40px;
-    right: 72px;
-    width: 24px;
-    height: auto;
-    cursor: pointer;
-  }
-
   & .cancel {
     position: absolute;
     bottom: 53px;
@@ -73,4 +75,55 @@ const ModalContainer = styled.div`
   }
 `;
 
-export default { Container, ModalContainer };
+const SelectionContainer = styled(ContentContainer)`
+  justify-content: center;
+  align-items: center;
+  & .content {
+    margin-bottom: 24px;
+  }
+
+  & .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px;
+
+    & h2 {
+      margin-bottom: 4px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    & span {
+      font-size: 12px;
+      color: ${theme.color.gray60};
+    }
+  }
+
+  & .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 324px;
+    height: 40px;
+
+    & button {
+      width: 150px;
+      height: 40px;
+      border-radius: 300px;
+    }
+
+    & .unselected-btn {
+      border: 1px solid ${theme.color.primary};
+      color: ${theme.color.primary};
+      background-color: ${theme.color.white};
+    }
+
+    & .selection-complete-btn {
+      border: 1px solid ${theme.color.primary};
+      color: ${theme.color.white};
+      background-color: ${theme.color.primary};
+    }
+  }
+`;
+
+export default { Container, LoadingContainer, SelectionContainer };

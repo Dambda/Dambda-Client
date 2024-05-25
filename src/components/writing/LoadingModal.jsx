@@ -10,14 +10,14 @@ const LoadingModal = ({ onClick }) => {
 
   return (
     <Styled.Container>
-      <Styled.ModalContainer>
+      <Styled.LoadingContainer>
         <img onClick={handleModal} className="closed-btn" src={closedBtn} />
         <img className="loading-spinner" src={loadingSpinner} />
         <span>
           지금 OOO님의 일기에 어울리는 감정과 키워드를 도출하고 있습니다.
         </span>{' '}
         <button className="cancel">분석 생략</button>
-      </Styled.ModalContainer>
+      </Styled.LoadingContainer>
     </Styled.Container>
   );
 };
