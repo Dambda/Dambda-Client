@@ -2,12 +2,12 @@ import { useState } from 'react';
 import Styled from '../../styles/components/writinginput';
 import completedIcon from '@/assets/icon/completed-icon.svg';
 
-const WritingInput = ({ onSubmit }) => {
+const WritingInput = ({ onClick }) => {
   const [value, setValue] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(true);
+    onClick(true);
   };
 
   const handleInput = (e) => {
@@ -21,7 +21,7 @@ const WritingInput = ({ onSubmit }) => {
         name="content"
         value={value}
         onChange={handleInput}
-        placeholder="OO님의 오늘 하루 이야기를 작성해주세요"
+        placeholder="OOO님의 오늘 하루 이야기를 작성해주세요"
       />
       <Styled.CompletedBtn>
         <span>작성완료</span>

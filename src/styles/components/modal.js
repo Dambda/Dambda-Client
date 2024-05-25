@@ -28,12 +28,7 @@ const ModalContainer = styled.div`
     left: 348px;
     width: 48px;
     height: 48px;
-    /* margin: auto; */
-    border: 5px solid #8594c0;
-    border-bottom-color: #47588c;
-    border-radius: 50%;
     display: inline-block;
-    box-sizing: border-box;
     animation: rotation 1.5s linear infinite;
 
     @keyframes rotation {
@@ -55,11 +50,12 @@ const ModalContainer = styled.div`
   }
 
   & .closed-btn {
-    width: 24px;
-    height: auto;
     position: absolute;
     top: 40px;
     right: 72px;
+    width: 24px;
+    height: auto;
+    cursor: pointer;
   }
 
   & .cancel {
@@ -73,6 +69,7 @@ const ModalContainer = styled.div`
     border-radius: 300px;
     background-color: ${theme.color.white};
     color: ${theme.color.primary};
+    cursor: pointer;
   }
 `;
 

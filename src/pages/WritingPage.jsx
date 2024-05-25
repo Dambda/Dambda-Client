@@ -6,9 +6,10 @@ import WritingInput from '../components/writing/WritingInput';
 import WritingEtc from '../components/writing/WritingEtc';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import LoadingModal from '../components/writing/LoadingModal';
+import SelectionModal from '../components/writing/SelectionModal';
 
 const WritingPage = () => {
-  const [submit, setSubmit] = useState(false);
+  const [modalView, setModalView] = useState(false);
 
   return (
     <Conatiner>
@@ -17,9 +18,10 @@ const WritingPage = () => {
         <img className="backward-btn" src={backwardBtn} />
       </Link>
       <WritingMenu />
-      <WritingInput onSubmit={setSubmit} />
+      <WritingInput onClick={setModalView} />
       <WritingEtc />
-      {submit ? <LoadingModal /> : null}
+      {/* {modalView ? <LoadingModal onClick={setModalView} /> : null} */}
+      {modalView ? <SelectionModal onClick={setModalView} /> : null}
     </Conatiner>
   );
 };
