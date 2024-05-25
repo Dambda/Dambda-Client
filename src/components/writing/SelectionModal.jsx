@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
+import { mockData } from './mock';
 
 const SelectionModal = ({ onClick }) => {
   const handleModal = () => {
@@ -23,13 +24,13 @@ const SelectionModal = ({ onClick }) => {
           <div className="select-emotion">
             <h3>감정</h3>
             <span>최대 5개까지 선택 가능합니다</span>
-            <SelectionList />
+            {/* <SelectionList items={mockData.emotions} /> */}
           </div>
 
           <div className="select-topic">
             <h3>주제</h3>
             <span>최대 5개까지 선택 가능합니다</span>
-            <SelectionList />
+            {/* <SelectionList items={mockData.topics} /> */}
           </div>
         </div>
 
