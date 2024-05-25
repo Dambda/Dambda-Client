@@ -1,10 +1,17 @@
-const SelectionList = ({ items }) => {
+import React from 'react';
+import Styled from '@/styles/components/modal';
+
+const SelectionList = ({ items, col }) => {
   return (
-    <ul>
+    <Styled.Ul col={col}>
       {items.map((item, index) => {
-        return <li key={index}>{item.name}</li>;
+        return (
+          <Styled.Li key={index} checked={item.isChecked}>
+            {item.name}
+          </Styled.Li>
+        );
       })}
-    </ul>
+    </Styled.Ul>
   );
 };
 

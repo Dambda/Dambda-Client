@@ -23,15 +23,27 @@ const SelectionModal = ({ onClick }) => {
 
           <div className="select">
             <div className="select-emotion">
-              <h3>감정</h3>
-              <span>최대 5개까지 선택 가능합니다</span>
-              {/* <SelectionList items={mockData.emotions} /> */}
+              <div className="emotion-header">
+                <h3>감정</h3>
+                <span>최대 5개까지 선택 가능합니다</span>
+              </div>
+              <SelectionList
+                items={mockData.emotions}
+                // checked={mockData.emotions.isChecked}
+                col="6"
+              />
             </div>
 
             <div className="select-topic">
-              <h3>주제</h3>
-              <span>최대 5개까지 선택 가능합니다</span>
-              {/* <SelectionList items={mockData.topics} /> */}
+              <div className="topic-header">
+                <h3>주제</h3>
+                <span>최대 5개까지 선택 가능합니다</span>
+              </div>
+              <SelectionList
+                items={mockData.topics}
+                // checked={mockData.topics.isChecked}
+                col="7"
+              />
             </div>
           </div>
         </div>

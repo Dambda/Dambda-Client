@@ -78,6 +78,8 @@ const LoadingContainer = styled(ContentContainer)`
 const SelectionContainer = styled(ContentContainer)`
   justify-content: center;
   align-items: center;
+  height: 604px;
+
   & .content {
     margin-bottom: 24px;
   }
@@ -97,6 +99,30 @@ const SelectionContainer = styled(ContentContainer)`
     & span {
       font-size: 12px;
       color: ${theme.color.gray60};
+    }
+  }
+
+  & .select {
+    width: 552px;
+    height: 404px;
+
+    & .emotion-header,
+    .topic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 188px;
+      height: 30px;
+    }
+
+    & h3 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    & span {
+      font-size: 12px;
+      color: ${theme.color.third};
     }
   }
 
@@ -126,4 +152,30 @@ const SelectionContainer = styled(ContentContainer)`
   }
 `;
 
-export default { Container, LoadingContainer, SelectionContainer };
+const Ul = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(
+    ${({ col }) => (Number(col) === 6 ? 6 : 7)},
+    1fr
+  );
+  grid-auto-rows: minmax(57, auto);
+  grid-gap: 12px;
+  width: 527px;
+  height: 76px;
+`;
+
+const Li = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  border: 1px solid ${theme.color.primary};
+  border-radius: 300px;
+  font-size: 14px;
+  background-color: ${({ checked }) =>
+    checked === true ? `${theme.color.primary}` : `${theme.color.white}`};
+  color: ${({ checked }) =>
+    checked === true ? `${theme.color.white}` : `${theme.color.primary}`};
+`;
+
+export default { Container, LoadingContainer, SelectionContainer, Ul, Li };
