@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import addBtn from '@/assets/icon/modal-add-btn.svg';
 
 const Container = styled.div`
   position: fixed;
@@ -21,6 +22,7 @@ const ContentContainer = styled.div`
   width: 744px;
   height: 468px;
   background-color: ${theme.color.white};
+  box-shadow: 0 4px 16px (0, 0, 0, 0.1);
 
   & .closed-btn {
     position: absolute;
@@ -91,7 +93,7 @@ const SelectionContainer = styled(ContentContainer)`
     margin-bottom: 12px;
 
     & h2 {
-      margin-bottom: 4px;
+      margin-bottom: 10px;
       font-size: 20px;
       font-weight: 700;
     }
@@ -113,6 +115,7 @@ const SelectionContainer = styled(ContentContainer)`
       align-items: flex-end;
       width: 188px;
       height: 30px;
+      margin-bottom: 12px;
     }
 
     & h3 {
@@ -123,6 +126,21 @@ const SelectionContainer = styled(ContentContainer)`
     & span {
       font-size: 12px;
       color: ${theme.color.third};
+    }
+  }
+
+  & form {
+    & input {
+      width: 552px;
+      height: 48px;
+      padding-left: 16px;
+      border: 1px solid #eaeaea;
+      border-radius: 200px;
+    }
+
+    & input::placeholder {
+      font-size: 14px;
+      color: ${theme.color.gray60};
     }
   }
 
@@ -156,12 +174,13 @@ const Ul = styled.ul`
   display: grid;
   grid-template-columns: repeat(
     ${({ col }) => (Number(col) === 6 ? 6 : 7)},
-    1fr
+    minmax(57px, auto)
   );
-  grid-auto-rows: minmax(57, auto);
+  grid-template-rows: repeat(2, 1fr);
   grid-gap: 12px;
-  width: 527px;
+  width: 552px;
   height: 76px;
+  margin-bottom: 24px;
 `;
 
 const Li = styled.li`
@@ -176,6 +195,7 @@ const Li = styled.li`
     checked === true ? `${theme.color.primary}` : `${theme.color.white}`};
   color: ${({ checked }) =>
     checked === true ? `${theme.color.white}` : `${theme.color.primary}`};
+  font-weight: ${({ checked }) => (checked === true ? `700` : `500`)};
 `;
 
 export default { Container, LoadingContainer, SelectionContainer, Ul, Li };

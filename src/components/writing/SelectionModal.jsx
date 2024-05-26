@@ -32,6 +32,13 @@ const SelectionModal = ({ onClick }) => {
                 // checked={mockData.emotions.isChecked}
                 col="6"
               />
+              <form>
+                <button className="add-btn" />
+                <input
+                  className="topic-input"
+                  placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                />
+              </form>
             </div>
 
             <div className="select-topic">
@@ -44,6 +51,13 @@ const SelectionModal = ({ onClick }) => {
                 // checked={mockData.topics.isChecked}
                 col="7"
               />
+              <form>
+                <button className="add-btn" />
+                <input
+                  className="topic-input"
+                  placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                />
+              </form>
             </div>
           </div>
         </div>
