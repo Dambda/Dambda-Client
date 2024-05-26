@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
-import addBtn from '@/assets/icon/modal-add-btn.svg';
 
 const Container = styled.div`
   position: fixed;
@@ -130,6 +129,15 @@ const SelectionContainer = styled(ContentContainer)`
   }
 
   & form {
+    & .add-btn {
+      width: 56px;
+      height: 32px;
+      border: 1px solid ${theme.color.primary};
+      border-radius: 300px;
+      background-image: url(${(props) => props.img});
+      background-color: ${theme.color.white};
+    }
+
     & input {
       width: 552px;
       height: 48px;

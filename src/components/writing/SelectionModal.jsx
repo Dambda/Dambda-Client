@@ -3,6 +3,7 @@ import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
 import { mockData } from './mock';
+import addBtn from '@/assets/icon/modal-add-btn.svg';
 
 const SelectionModal = ({ onClick }) => {
   const handleModal = () => {
@@ -10,8 +11,8 @@ const SelectionModal = ({ onClick }) => {
   };
   return (
     <Styled.Container>
-      <img onClick={handleModal} className="closed-btn" src={closedBtn} />
       <Styled.SelectionContainer>
+        <img onClick={handleModal} className="closed-btn" src={closedBtn} />
         <div className="content">
           <div className="header">
             <h2>본인이 생각하는 오늘의 감정과 주제를 선택해주세요</h2>
@@ -33,7 +34,7 @@ const SelectionModal = ({ onClick }) => {
                 col="6"
               />
               <form>
-                <button className="add-btn" />
+                <button className="add-btn" img={addBtn} />
                 <input
                   className="topic-input"
                   placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
@@ -52,7 +53,7 @@ const SelectionModal = ({ onClick }) => {
                 col="7"
               />
               <form>
-                <button className="add-btn" />
+                <button className="add-btn" img={addBtn} />
                 <input
                   className="topic-input"
                   placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"

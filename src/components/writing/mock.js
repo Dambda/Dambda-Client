@@ -24,6 +24,7 @@ export const mockData = {
     { name: '기숙사', isChecked: false },
     { name: '팀플', isChecked: false },
     { name: '축구', isChecked: false },
+    { name: '손흥민', isChecked: false },
     { name: '김민재', isChecked: false },
   ],
 };
