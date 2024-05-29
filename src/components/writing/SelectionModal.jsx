@@ -1,18 +1,39 @@
-import React from 'react';
+import { React, useState } from 'react';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
 import { mockData } from './mock';
-import addBtn from '@/assets/icon/modal-add-btn.svg';
 
 const SelectionModal = ({ onClick }) => {
-  const handleModal = () => {
+  const [emotionKeyword, setEmotionKeyword] = useState(mockData.emotions);
+  const [topicKeyword, setTopicKeyword] = useState(mockData.topics);
+  const clickClosedBtn = () => {
     onClick(false);
   };
+
+  const handleKeywordClick = (item) => {
+    const { innerText } = item.target;
+
+    setEmotionKeyword((prev) =>
+      prev.map((keyword) =>
+        keyword.name === innerText
+          ? { ...keyword, isChecked: !keyword.isChecked }
+          : keyword,
+      ),
+    );
+    setTopicKeyword((prev) =>
+      prev.map((keyword) =>
+        keyword.name === innerText
+          ? { ...keyword, isChecked: !keyword.isChecked }
+          : keyword,
+      ),
+    );
+  };
+
   return (
     <Styled.Container>
       <Styled.SelectionContainer>
-        <img onClick={handleModal} className="closed-btn" src={closedBtn} />
+        <img onClick={clickClosedBtn} className="closed-btn" src={closedBtn} />
         <div className="content">
           <div className="header">
             <h2>본인이 생각하는 오늘의 감정과 주제를 선택해주세요</h2>
@@ -28,18 +49,20 @@ const SelectionModal = ({ onClick }) => {
                 <h3>감정</h3>
                 <span>최대 5개까지 선택 가능합니다</span>
               </div>
-              <SelectionList
-                items={mockData.emotions}
-                // checked={mockData.emotions.isChecked}
-                col="6"
-              />
-              <form>
-                <button className="add-btn" img={addBtn} />
-                <input
-                  className="topic-input"
-                  placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+              <div className="emotion-keywords">
+                <SelectionList
+                  items={emotionKeyword}
+                  col="6"
+                  onClick={handleKeywordClick}
                 />
-              </form>
+                <form>
+                  <button className="add-btn" />
+                  <input
+                    className="topic-input"
+                    placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                  />
+                </form>
+              </div>
             </div>
 
             <div className="select-topic">
@@ -47,18 +70,20 @@ const SelectionModal = ({ onClick }) => {
                 <h3>주제</h3>
                 <span>최대 5개까지 선택 가능합니다</span>
               </div>
-              <SelectionList
-                items={mockData.topics}
-                // checked={mockData.topics.isChecked}
-                col="7"
-              />
-              <form>
-                <button className="add-btn" img={addBtn} />
-                <input
-                  className="topic-input"
-                  placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+              <div className="topic-keywords">
+                <SelectionList
+                  items={topicKeyword}
+                  col="7"
+                  onClick={handleKeywordClick}
                 />
-              </form>
+                <form>
+                  <button className="add-btn" />
+                  <input
+                    className="topic-input"
+                    placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>
