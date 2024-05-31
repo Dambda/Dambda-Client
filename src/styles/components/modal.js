@@ -173,10 +173,14 @@ const SelectionContainer = styled(ContentContainer)`
     width: 324px;
     height: 40px;
 
-    & button {
+    & button,
+    a {
       width: 150px;
       height: 40px;
       border-radius: 300px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
     }
 
     & .unselected-btn {

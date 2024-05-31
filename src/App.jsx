@@ -11,6 +11,7 @@ import SearchPage from './pages/SearchPage';
 import StatisticsPage from './pages/StatisticsPage';
 import WritingPage from './pages/WritingPage';
 import CalendarDetailPage from './pages/CalendarDetailPage';
+import CalendarAnalysisPage from './pages/CalendarAnalysisPage';
 
 function App() {
   return (
@@ -18,17 +19,24 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/calendar" element={<CalendarPage />} />
-            <Route path='/calendar/detail/:date' element={<CalendarDetailPage />}/>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/program" element={<ProgramPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/statistics" element={<StatisticsPage />} />
-            <Route path="/writing" element={<WritingPage />} />
-          </Route>
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/calendar" element={<CalendarPage />} />
+              <Route
+                path="/calendar/detail/:date"
+                element={<CalendarDetailPage />}
+              />
+              <Route
+                path="/calendar/analysis"
+                element={<CalendarAnalysisPage />}
+              />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/program" element={<ProgramPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/statistics" element={<StatisticsPage />} />
+              <Route path="/writing" element={<WritingPage />} />
+            </Route>
+          </Routes>
         </BrowserRouter>
       </ThemeProvider>
     </>

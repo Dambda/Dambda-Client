@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
@@ -28,6 +29,8 @@ const SelectionModal = ({ onClick }) => {
           : keyword,
       ),
     );
+
+    console.log(emotionKeyword);
   };
 
   return (
@@ -47,7 +50,7 @@ const SelectionModal = ({ onClick }) => {
             <div className="select-emotion">
               <div className="emotion-header">
                 <h3>감정</h3>
-                <span>최대 5개까지 선택 가능합니다</span>
+                <span>최대 3개까지 선택 가능합니다</span>
               </div>
               <div className="emotion-keywords">
                 <SelectionList
@@ -57,10 +60,7 @@ const SelectionModal = ({ onClick }) => {
                 />
                 <form>
                   <button className="add-btn" />
-                  <input
-                    className="topic-input"
-                    placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
-                  />
+                  <input placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요" />
                 </form>
               </div>
             </div>
@@ -68,7 +68,7 @@ const SelectionModal = ({ onClick }) => {
             <div className="select-topic">
               <div className="topic-header">
                 <h3>주제</h3>
-                <span>최대 5개까지 선택 가능합니다</span>
+                <span>최대 3개까지 선택 가능합니다</span>
               </div>
               <div className="topic-keywords">
                 <SelectionList
@@ -90,7 +90,9 @@ const SelectionModal = ({ onClick }) => {
 
         <div className="buttons">
           <button className="unselected-btn">미선택</button>
-          <button className="selection-complete-btn">선택 완료</button>
+          <button className="selection-complete-btn">
+            <Link to="/calendar/analysis">선택 완료</Link>
+          </button>
         </div>
       </Styled.SelectionContainer>
     </Styled.Container>
