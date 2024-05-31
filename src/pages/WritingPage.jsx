@@ -10,6 +10,7 @@ import SelectionModal from '../components/writing/SelectionModal';
 
 const WritingPage = () => {
   const [modalView, setModalView] = useState(false);
+  localStorage.setItem('fold', false);
 
   return (
     <Conatiner>
