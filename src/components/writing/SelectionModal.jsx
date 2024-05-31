@@ -48,7 +48,7 @@ const SelectionModal = ({ onClick }) => {
             <div className="select-emotion">
               <div className="emotion-header">
                 <h3>감정</h3>
-                <span>최대 5개까지 선택 가능합니다</span>
+                <span>최대 3개까지 선택 가능합니다</span>
               </div>
               <div className="emotion-keywords">
                 <SelectionList
@@ -66,7 +66,7 @@ const SelectionModal = ({ onClick }) => {
             <div className="select-topic">
               <div className="topic-header">
                 <h3>주제</h3>
-                <span>최대 5개까지 선택 가능합니다</span>
+                <span>최대 3개까지 선택 가능합니다</span>
               </div>
               <div className="topic-keywords">
                 <SelectionList

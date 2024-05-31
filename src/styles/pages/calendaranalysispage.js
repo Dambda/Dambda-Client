@@ -4,7 +4,8 @@ import showDiaryIcon from '@/assets/icon/show-diary.svg';
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: 810px;
 
   & header {
@@ -61,6 +62,15 @@ const Container = styled.div`
       background-repeat: no-repeat;
       background-position: 88px 8px;
       cursor: pointer;
+    }
+  }
+
+  & main {
+    .recommend-todo {
+      h3 {
+        font-size: 20px;
+        font-weight: 700;
+      }
     }
   }
 `;
