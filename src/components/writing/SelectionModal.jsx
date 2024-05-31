@@ -29,6 +29,8 @@ const SelectionModal = ({ onClick }) => {
           : keyword,
       ),
     );
+
+    console.log(emotionKeyword);
   };
 
   return (

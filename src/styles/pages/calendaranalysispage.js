@@ -13,7 +13,7 @@ const Container = styled.div`
     justify-content: space-between;
     width: 936px;
     height: 40px;
-    margin-top: 29.5px;
+    margin: 29.5px 0 48px 0;
 
     .title {
       display: flex;
@@ -37,7 +37,7 @@ const Container = styled.div`
       display: flex;
     }
 
-    li {
+    .diary-page {
       width: 16px;
       height: 16px;
       border-radius: 50%;
@@ -66,10 +66,60 @@ const Container = styled.div`
   }
 
   & main {
+    .analysis {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .character-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .emotion-character {
+          width: 144px;
+          height: 144px;
+          margin-bottom: 8px;
+        }
+
+        ul {
+          display: flex;
+        }
+
+        .character {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background-color: #cccccc;
+          margin-right: 12px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .contents-container {
+      .comment {
+        margin-bottom: 16px;
+        line-height: 1.3em;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+      }
+    }
+
     .recommend-todo {
       h3 {
+        margin-bottom: 12px;
         font-size: 20px;
         font-weight: 700;
+      }
+
+      .todo-container {
+        display: flex;
+        justify-content: space-between;
+        width: 552px;
+        height: 168px;
       }
     }
   }

@@ -5,6 +5,7 @@ const Container = styled.div`
   position: relative;
   width: 168px;
   height: 168px;
+  border-radius: 8px;
   background-color: ${theme.color.white};
 
   & .classification {
