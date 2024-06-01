@@ -8,6 +8,7 @@ const Menu = ({isFold, setFold}) => {
         localStorage.setItem("fold", JSON.stringify(!isFold));
         setFold(value);
     }
+
     return (
         <Styled.Container isfold={isFold.toString()} onMouseEnter={(e) => onChange(true)} onMouseLeave={(e) => onChange(false)} className={`${isFold === true ? "active": ""}`}>
             <div>
