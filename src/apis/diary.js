@@ -11,7 +11,7 @@ export const getComment = async({id}) => {
 }
 
 export const getDiaryToDate = async ({year, month, date}) => {
-    const response = await instance.get(`/diaries/list/date/${year}/${month}/${date}`, {
+    const response = await instance.get(`/diaries/daily/${year}/${month}/${date}`, {
         headers : {
             'Content-Type' : 'application/json'
         }
