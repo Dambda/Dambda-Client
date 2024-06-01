@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Menu from "./menu/Menu";
 import Header from "./header/Header";
-import { Outlet, json, useLocation } from "react-router-dom";
+import { Outlet,useLocation } from "react-router-dom";
 
 const Layout = () => {
     const [isShowMenu, setIsShowMenu] = useState("show");
@@ -13,7 +13,8 @@ const Layout = () => {
     const [isFold, setIsFold] = useState(parseFold);
 
     useEffect(() => {
-        if(location.pathname === "/writing"){
+        const locationCheck = location.pathname.split("/");
+        if(locationCheck[1] === "writing"){
             setIsShowMenu("none")
             setHeaderOpt("center")
         } else {
