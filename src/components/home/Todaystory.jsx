@@ -19,10 +19,12 @@ const Todaystory = () => {
 
     const handleGetDiary = async () => {
         try {
-            const today = new Date();
-            const data = await getDiaryToDate({year : today.getFullYear(), month : today.getMonth() + 1, date : today.getDate()})
-            if(data.result){
-                setDiaryData(data.result); // success
+            //const today = new Date();
+            //const data = await getDiaryToDate({year : today.getFullYear(), month : today.getMonth() + 1, date : today.getDate()})
+            const data = await getDiaryToDate({year : 2024, month : 5, date : 18})
+
+            if(data){
+                setDiaryData(data);
             }
         } catch(e) {
             console.error(e);
@@ -38,7 +40,8 @@ const Todaystory = () => {
                     diaryData.length === 0 ? "" :
                     diaryData.map((data, index) => {
                         return(
-                            <SimpleDiary key={index} width={1000} height={200} fontSize={16} text={data.content} commentCount={0} />
+                            <SimpleDiary key={index} width={1000} height={200} fontSize={16} text={data.diary.content} commentCount={data.commentCount
+                            } />
                         );
                     })
                     

@@ -4,6 +4,7 @@ import theme from "@/styles/theme";
 const Conatiner = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
     align-items: center;
     padding: 20px 70px;
