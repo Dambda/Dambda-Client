@@ -8,6 +8,9 @@ import { mockData } from './mock';
 const SelectionModal = ({ onClick }) => {
   const [emotionKeyword, setEmotionKeyword] = useState(mockData.emotions);
   const [topicKeyword, setTopicKeyword] = useState(mockData.topics);
+  const [emotionInputView, setEmotionInputView] = useState(false);
+  const [topicInputView, setTopicInputView] = useState(false);
+
   const clickClosedBtn = () => {
     onClick(false);
   };
@@ -31,6 +34,14 @@ const SelectionModal = ({ onClick }) => {
     );
 
     console.log(emotionKeyword);
+  };
+
+  const addEmotionKeyword = () => {
+    setEmotionInputView((prev) => !prev);
+    console.log(emotionInputView);
+  };
+  const addTopicKeyword = () => {
+    setTopicInputView((prev) => !prev);
   };
 
   return (
@@ -59,8 +70,14 @@ const SelectionModal = ({ onClick }) => {
                   onClick={handleKeywordClick}
                 />
                 <form>
-                  <button className="add-btn" />
-                  <input placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요" />
+                  <button
+                    className="add-btn"
+                    type="button"
+                    onClick={addEmotionKeyword}
+                  />
+                  {emotionInputView && (
+                    <input placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요" />
+                  )}
                 </form>
               </div>
             </div>
@@ -77,11 +94,17 @@ const SelectionModal = ({ onClick }) => {
                   onClick={handleKeywordClick}
                 />
                 <form>
-                  <button className="add-btn" />
-                  <input
-                    className="topic-input"
-                    placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                  <button
+                    className="add-btn"
+                    type="button"
+                    onClick={addTopicKeyword}
                   />
+                  {topicInputView && (
+                    <input
+                      className="topic-input"
+                      placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                    />
+                  )}
                 </form>
               </div>
             </div>
