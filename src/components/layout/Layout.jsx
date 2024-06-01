@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import Menu from "./menu/Menu";
 import Header from "./header/Header";
+import Footer from "./footer/Footer";
 import { Outlet,useLocation } from "react-router-dom";
 
 const Layout = () => {
     const [isShowMenu, setIsShowMenu] = useState("show");
+    const [isShowFooter, setIsShowFooter] = useState("show");
     const [headerOpt, setHeaderOpt] = useState("default");
     const location = useLocation();
 
@@ -21,6 +23,11 @@ const Layout = () => {
             setIsShowMenu("show")
             setHeaderOpt("default");
         }
+        if(!locationCheck[2]){
+            setIsShowFooter("show")
+        } else {
+            setIsShowFooter("none");
+        }
     }, [location])
     return (
         <>
@@ -30,6 +37,7 @@ const Layout = () => {
                     <Header headerOpt={headerOpt}/>
                     <div style={{width : "100vw"}}>
                         <Outlet />
+                        { isShowFooter === "show" && <Footer/>}
                     </div>
                 </div>
             </div>
