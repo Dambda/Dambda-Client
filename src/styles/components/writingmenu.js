@@ -29,6 +29,43 @@ const TemplateContainer = styled.div`
     font-size: 14px;
     margin-right: 4px;
   }
+
+  & .topic-menu,
+  .template-menu {
+    cursor: pointer;
+  }
+
+  & .topic-menu:hover,
+  .template-menu:hover {
+    font-weight: 700;
+  }
 `;
 
-export default { Container, TemplateContainer };
+const Template = styled.div`
+  cursor: pointer;
+  & button {
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    background-color: ${theme.color.white};
+  }
+`;
+
+const EtcContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 72px;
+  left: 569px;
+  width: 301px;
+  height: 48px;
+  border-radius: 6px;
+  border: 1px solid #eaeaea;
+
+  & img {
+    cursor: pointer;
+  }
+`;
+
+export default { Container, TemplateContainer, Template, EtcContainer };

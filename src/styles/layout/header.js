@@ -5,7 +5,7 @@ const Container = styled.div`
     width: 1000px;
     padding: 8px 0px;
     display: flex;
-    justify-content: space-between;
+    justify-content: ${(props) => props.headeropt === "center" ? "center" : "space-between"};
     font-size: 14px;
     color : ${theme.color.black};
     & .item {
