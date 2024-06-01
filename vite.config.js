@@ -16,7 +16,4 @@ export default defineConfig({
       { find: "@", replacement: "/src" }
     ]
   },
-  server : {
-    port : 8080
-  }
 })
