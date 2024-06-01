@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import GpsSVG from "@/assets/icon/header/gps.svg?react";
 import CloudSVG from "@/assets/icon/header/cloud.svg?react";
 
 const HeaderUser = () => {
-    const today = new Date();
-    const formattedDate = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()}`;
-    const formattedTime = `${today.getHours()}:${today.getMinutes()}`;
+    const [currentTime, setCurrentTime] = useState(new Date());
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 10000); 
+
+        return () => clearInterval(timer);
+    }, []);
+
+    const formattedDate = `${currentTime.getFullYear()}. 
+    ${currentTime.getMonth() + 1 < 10 ? "0" + (currentTime.getMonth() + 1) : currentTime.getMonth() + 1}. 
+    ${currentTime.getDate() < 10 ? "0" + currentTime.getDate() : currentTime.getDate()}`;
+    const formattedTime = `${currentTime.getHours()}:${currentTime.getMinutes() < 10 ? "0"+currentTime.getMinutes() : currentTime.getMinutes()}`;
 
     return (
         <div style={{display:"flex", gap:"10px"}}>
