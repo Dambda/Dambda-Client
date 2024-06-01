@@ -1,13 +1,25 @@
 import { useState } from 'react';
 import Styled from '../../styles/components/writinginput';
 import completedIcon from '@/assets/icon/completed-icon.svg';
+import getKeyword from '@/apis/api';
 
 const WritingInput = ({ onClick }) => {
   const [value, setValue] = useState('');
 
+  const handleKeywordLoad = async (inputValue) => {
+    try {
+      const { result } = await getKeyword(inputValue);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = (e) => {
+    const inputValue = e.target[0].value;
     e.preventDefault();
     onClick(true);
+    handleKeywordLoad(inputValue);
   };
 
   const handleInput = (e) => {
