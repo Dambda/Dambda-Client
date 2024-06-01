@@ -3,10 +3,11 @@ import theme from "@/styles/theme";
 
 const StyledCalendar = styled.div`
     width: 450px;
+    position: relative;
     .emotion-button {
         position : absolute;
-        left: 650px;
-        top: 147px;
+        left: 400px;
+        top: 10px;
     }
     .react-calendar {
         width: 100%;
@@ -32,6 +33,7 @@ const StyledCalendar = styled.div`
             display: flex;
             gap: 10px;
         }
+       
         .react-calendar__month-view__weekdays abbr {
             color : ${theme.color.white};
             text-decoration: none;
@@ -56,8 +58,13 @@ const StyledCalendar = styled.div`
         .react-calendar__month-view__days__day {
             height: 55px;
             max-width: 55px !important;
+            background-color: #ffffff;
             border-radius : 6px;
             font-size: 16px;
+        }
+        .react-calendar__tile--now {
+            background-color: #969FBA;
+            color: white;
         }
         .emotion abbr{
             display: ${(props) => props.isemotion == "true" ? "none" : ""};
@@ -73,8 +80,8 @@ const StyledCalendar = styled.div`
             color : ${theme.color.gray40} !important;
         }
         .react-calendar__tile--active {
-            background-color: ${theme.color.primary};
-            color : ${theme.color.white};
+            background-color: ${theme.color.primary} !important;
+            color : ${theme.color.white} !important;
         }
         .react-calendar__navigation {
             justify-content: center;

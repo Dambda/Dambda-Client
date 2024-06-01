@@ -7,7 +7,7 @@ const dummyData = "Lorem Ipsum is simply dummy text of the printing and typesett
 
 const CalendarPage = () => {
     const [today, setToday] = useState(new Date());
-    
+    console.log(today)
     return (
         <div style={{display : "flex", flexDirection : "column", alignItems : "center"}}>
             <div style={{width : "1000px", height : "1080px", padding : "100px 0px"}}>

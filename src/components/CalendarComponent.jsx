@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import StyledCalendar from "../styles/components/calendar";
@@ -7,6 +7,8 @@ import sadPNG from "@/assets/sad.png";
 import EmotionSVG from "@/assets/icon/emotion-icon.svg?react";
 import NumberSVG from "@/assets/icon/number10-icon.svg?react";
 
+import { getDiaryToMonth } from "../apis/diary";
+
 const myFormatWeekday = (_locale, date) => {
     const weekdayShortNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     return weekdayShortNames[date.getDay()];
@@ -14,7 +16,13 @@ const myFormatWeekday = (_locale, date) => {
 
 const CalendarComponent = ({today, setToday}) => {
     const [isEmotion, setIsEmotion] = useState(false);
-
+    const [hasDiaryMonth, setHasDiaryMonth] = useState([]);
+    useEffect(() => {
+        
+    }, [today]);
+    const handleDiaryMonth = async() => {
+        const data = getDiaryToMonth
+    }
     return (
         <StyledCalendar isemotion={isEmotion.toString()}>
             <div className="emotion-button" onClick={() => setIsEmotion((prev) => !prev)}>
