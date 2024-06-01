@@ -13,13 +13,13 @@ export default defineConfig({
     alias: [{ find: '@', replacement: '/src' }],
   },
 
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://server.moonver.dev',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'https://server.moonver.dev',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, ''),
+  //     },
+  //   },
+  // },
 });

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import Styled from '../../styles/components/writinginput';
 import completedIcon from '@/assets/icon/completed-icon.svg';
-import getKeyword from '@/apis/api';
+import { getKeyword } from '@/apis/api';
 
 const WritingInput = ({ onClick }) => {
   const [value, setValue] = useState('');
 
   const handleKeywordLoad = async (inputValue) => {
     try {
-      const { result } = await getKeyword(inputValue);
+      const result = await getKeyword({ inputValue });
       console.log(result);
     } catch (error) {
       console.error(error);
@@ -20,6 +20,7 @@ const WritingInput = ({ onClick }) => {
     e.preventDefault();
     onClick(true);
     handleKeywordLoad(inputValue);
+    // console.log(inputValue);
   };
 
   const handleInput = (e) => {
