@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import addBtn from '@/assets/icon/modal-add-btn.svg';
 
 const Container = styled.div`
   position: fixed;
@@ -128,14 +129,23 @@ const SelectionContainer = styled(ContentContainer)`
     }
   }
 
-  & form {
+  & .emotion-keywords,
+  .topic-keywords {
+    position: relative;
+
     & .add-btn {
+      position: absolute;
+      top: 44px;
+      right: 10px;
       width: 56px;
       height: 32px;
       border: 1px solid ${theme.color.primary};
       border-radius: 300px;
-      background-image: url(${(props) => props.img});
+      background-image: url(${addBtn});
+      background-repeat: no-repeat;
+      background-position: center center;
       background-color: ${theme.color.white};
+      cursor: pointer;
     }
 
     & input {
@@ -150,6 +160,11 @@ const SelectionContainer = styled(ContentContainer)`
       font-size: 14px;
       color: ${theme.color.gray60};
     }
+
+    & input:focus {
+      outline: none;
+      border-color: ${theme.color.primary};
+    }
   }
 
   & .buttons {
@@ -158,10 +173,14 @@ const SelectionContainer = styled(ContentContainer)`
     width: 324px;
     height: 40px;
 
-    & button {
+    & button,
+    a {
       width: 150px;
       height: 40px;
       border-radius: 300px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
     }
 
     & .unselected-btn {
@@ -204,6 +223,7 @@ const Li = styled.li`
   color: ${({ checked }) =>
     checked === true ? `${theme.color.white}` : `${theme.color.primary}`};
   font-weight: ${({ checked }) => (checked === true ? `700` : `500`)};
+  cursor: pointer;
 `;
 
 export default { Container, LoadingContainer, SelectionContainer, Ul, Li };
