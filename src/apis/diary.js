@@ -43,8 +43,14 @@ export const getDiaryComment = async({id}) => {
 }
 
 export const postDiaryComment = async({id, content}) => {
-    const request = await instance.post(`/diaries/${id}/comments`, {
+    const request = await instance.post(`/diaries/${id}/comments`, 
+    {
         content : content
+    }, 
+    {
+        headers : {
+            'Content-Type' : 'application/json'
+        }
     })
 
     return request;

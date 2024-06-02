@@ -19,8 +19,8 @@ const CalendarDetailPage = () => {
 
   const [diaryNum, setDiaryNum] = useState(0);
   const [diaryData, setDiaryData] = useState([]);
+  const [diaryId, setDiaryId] = useState([]); 
   const [commentData, setCommentData] = useState([]);
-  
 
   const [commentText, setCommentText] = useState("");
 
@@ -34,7 +34,7 @@ const CalendarDetailPage = () => {
 
   useEffect(() => {
     if(diaryData.length !== 0){
-      handleGetDiaryComment({id : diaryData[diaryNum].diary.id});
+      handleGetDiaryComment({id : diaryId[diaryNum]});
     }
   }, [diaryNum])
 
@@ -43,6 +43,12 @@ const CalendarDetailPage = () => {
           const response = await getDiaryToDate({year : today[0], month : today[1], date : today[2]});
           if(response.length !== 0){
               setDiaryData(response);
+              let idArr = [];
+              response.forEach(element => {
+                idArr.push(element.diary.id);
+              });
+              console.log(idArr)
+              setDiaryId(idArr);
               handleGetDiaryComment({id : response[diaryNum].diary.id})
           }
       } catch(e) {
@@ -55,7 +61,6 @@ const CalendarDetailPage = () => {
       const response = await getDiaryComment({id : id});
       if(response.length !== 0){
         setCommentData(response.data);
-        console.log(response.data)
       }
     } catch(e) {
       console.log(e);
@@ -64,9 +69,9 @@ const CalendarDetailPage = () => {
 
   const handlePostDiaryComment = async ({content}) => {
     try {
-      const request = await postDiaryComment({content : content});
+      const request = await postDiaryComment({id : diaryId[diaryNum], content : content});
       if(request.status === "200"){
-        console.log("AA")
+        handleGetDiaryComment({id : diaryId[diaryNum]}) // data reloading
       }
     } catch(e) {
       console.error(e);
