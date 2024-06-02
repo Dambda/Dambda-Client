@@ -47,7 +47,6 @@ const CalendarDetailPage = () => {
               response.forEach(element => {
                 idArr.push(element.diary.id);
               });
-              console.log(idArr)
               setDiaryId(idArr);
               handleGetDiaryComment({id : response[diaryNum].diary.id})
           }
@@ -63,19 +62,20 @@ const CalendarDetailPage = () => {
         setCommentData(response.data);
       }
     } catch(e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
   const handlePostDiaryComment = async ({content}) => {
     try {
       const request = await postDiaryComment({id : diaryId[diaryNum], content : content});
-      if(request.status === "200"){
+      if(request.status === 200){
         handleGetDiaryComment({id : diaryId[diaryNum]}) // data reloading
       }
     } catch(e) {
       console.error(e);
     }
+    setCommentText("");
   }
 
   return (
