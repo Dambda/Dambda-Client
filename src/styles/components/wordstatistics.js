@@ -1,4 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const loadingSpan = keyframes`
+    0%{
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+   
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+`;
 
 const Container = styled.div`
     display: flex;
@@ -14,6 +26,10 @@ const Container = styled.div`
         font-size: 20px;
         padding: 12px;
         background-color: #f5f7ff;
+        animation: 0.6s ease-in-out ${loadingSpan};
+    }
+    .loading {
+        animation: 0.6s ease-in-out ${loadingSpan};
     }
     .wordstatistics-grid {
         display: flex;

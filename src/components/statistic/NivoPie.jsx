@@ -1,8 +1,53 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import {ResponsivePie} from "@nivo/pie"
 import Container from "../../styles/components/nivopie";
+import { recommend, emotion, randEmotions, words } from "../../constants/report";
 
-const NivoPie = ({data}) => {
+function getRandomItems(arr, num) {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, num);
+}
+
+function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const NivoPie = ({date, setReport}) => {
+    const [data, setData] = useState([
+        { "id": "기쁨", "label": "기쁨", "value": 55 },
+        { "id": "슬픔", "label": "슬픔", "value": 15 },
+        { "id": "분노", "label": "분노", "value": 10 },
+        { "id": "불안", "label": "불안", "value": 20 }
+    ]);
+
+    const updateDataRandomly = () => {
+        let remaining = 100;
+        const newData = data.map((item, index) => {
+            const value = index === data.length - 1 
+                ? remaining 
+                : Math.floor(Math.random() * remaining);
+            remaining -= value;
+            return { ...item, value };
+        });
+        return newData; 
+    };
+
+    useEffect(() => {
+        const newData = updateDataRandomly(); 
+        setData(newData); 
+
+        const highestValueEmotion = newData.reduce((prev, current) => {
+            return (prev.value > current.value) ? prev : current;
+        }).id;
+        
+        setReport({
+            useWord : getRandomItems(words, 3),
+            emotion: highestValueEmotion,
+            choiceWord : getRandomItems(randEmotions, 3),
+            suggestion : getRandomItem(recommend)
+        });
+    
+    }, [date]);
 
     return (
         <Container>
@@ -17,21 +62,15 @@ const NivoPie = ({data}) => {
                     padAngle={0}
                     cornerRadius={0}
                     enableArcLinkLabels={false}
-                    colors={['#FEF79D', '#C9E5F1', '#F1D8F5', '#F7D6DF']}// 커스터하여 사용할 때
+                    colors={['#FEF79D', '#C9E5F1', '#F1D8F5', '#F7D6DF']}
                     borderWidth={0}
                     arcLinkLabelsSkipAngle={0}
                     arcLinkLabelsTextColor="#1D1D1D"
                     activeOuterRadiusOffset={8}
                     arcLinkLabelsThickness={2}
-                    arcLinkLabelsColor={{ from: 'color' }} // pad 색상에 따라감
-                    /**
-                     * label (pad에 표현되는 글씨) skip할 기준 각도
-                     */
+                    arcLinkLabelsColor={{ from: 'color' }} 
                     arcLabelsSkipAngle={10}
                     theme={{
-                        /**
-                         * label style (pad에 표현되는 글씨)
-                         */
                         labels: {
                             text: {
                                 fontSize: 16,
@@ -39,9 +78,7 @@ const NivoPie = ({data}) => {
                                 fill: '#A1A1A1',
                             },
                         },
-                        /**
-                         * legend style (default로 하단에 있는 색상별 key 표시)
-                         */
+
                         legends: {
                             text: {
                                 fontSize: 12,
@@ -49,12 +86,6 @@ const NivoPie = ({data}) => {
                             },
                         },
                     }}
-                    /**
-                     * pad 클릭 이벤트
-                     */
-                    /**
-                     * legend 설정 (default로 하단에 있는 색상별 key 표시)
-                     */
                     legends={[
                         {
                             anchor: 'bottom', // 위치

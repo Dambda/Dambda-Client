@@ -8,7 +8,13 @@ const baseList = ["월 기준", "주 기준", "일 기준"];
 
 const SetStatisticsData = ({date, base, setDate, setBase}) => {
     const [isDrop, setIsDrop] = useState(false);
+    const [baseTitle, setBaseTitle] = useState('');
     const selectRef = useRef();
+
+    useEffect(() => {
+        handleBaseTitle({date, base})
+    }, [base, date]);
+    
     useEffect(() => {
         const handleClick = (e) => {
             if (selectRef.current && !selectRef.current.contains(e.target)) {
@@ -19,36 +25,42 @@ const SetStatisticsData = ({date, base, setDate, setBase}) => {
         return () => window.removeEventListener('mousedown', handleClick);
     }, [selectRef])
 
-    const onClickLeftBtn = () => {
-        const tempDate = [...date];
-        if(Number(tempDate[1]) == 1){
-            tempDate[1] = "12";
-            tempDate[0] = (Number(tempDate[0]) - 1).toString();
+    const onClickLeftBtn = ({base}) => {
+        let tempDate = new Date(date[0], date[1] - 1, date[2]); 
+        if(base === "월 기준"){
+            tempDate.setMonth(tempDate.getMonth() - 1); 
+        } else {
+            tempDate.setDate(tempDate.getDate() - 1); 
         }
-        else
-        tempDate[1] = (Number(tempDate[1]) - 1).toString().length ===1 ? `0${(Number(tempDate[1]) - 1).toString()}`: `${(Number(tempDate[1]) - 1).toString()}`;;
-        setDate(tempDate);
+        setDate([tempDate.getFullYear(), tempDate.getMonth() + 1, tempDate.getDate()]);
     }
 
-    const onClickRightBtn = () => {
-        const tempDate = [...date];
-        if(Number(tempDate[1]) == 12){
-            tempDate[1] = "01";
-            tempDate[0] = (Number(tempDate[0]) + 1).toString();
+    const onClickRightBtn = ({base}) => {
+        let tempDate = new Date(date[0], date[1] - 1, date[2]); 
+        if(base === "월 기준"){
+            tempDate.setMonth(tempDate.getMonth() + 1); 
+        } else {
+            tempDate.setDate(tempDate.getDate() + 1); 
         }
-        else
-        tempDate[1] = (Number(tempDate[1]) + 1).toString().length === 1 ? `0${(Number(tempDate[1]) + 1).toString()}`: `${(Number(tempDate[1]) + 1).toString()}`;;
-        setDate(tempDate);
+        setDate([tempDate.getFullYear(), tempDate.getMonth() + 1, tempDate.getDate()]);
     }
     
+    const handleBaseTitle = ({date, base}) => {
+        if(base === "월 기준"){
+            setBaseTitle(`${date[0]}.${date[1] < 10 ? "0"+ date[1] : date[1]}`)
+        } else {
+            setBaseTitle(`${date[0]}.${date[1] < 10 ? "0"+ date[1] : date[1]}.${date[2] < 10 ? "0" + date[2] : date[2]}`)
+        }
+    }
+
     return (
         <Container>
             <div className="setstatistics-btnbox">
-                <div className="setstatistics-btn" onClick={() => onClickLeftBtn()}>
+                <div className="setstatistics-btn" onClick={() => onClickLeftBtn({base})}>
                     <LeftSVG/>
                 </div>
-                <span>{date[0]+"."+date[1]}</span>
-                <div className="setstatistics-btn" onClick={() => onClickRightBtn()}>
+                <span>{baseTitle}</span>
+                <div className="setstatistics-btn" onClick={() => onClickRightBtn({base})}>
                     <RightSVG/>
                 </div>
             </div>
