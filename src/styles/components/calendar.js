@@ -90,7 +90,7 @@ const StyledCalendar = styled.div`
         .react-calendar__navigation__label {
             flex-grow: 0 !important;
         }
-        .hightlights {
+        .highlights {
             background-color: #E4EBFF;
             color: ${theme.color.black};
         }

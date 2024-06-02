@@ -16,39 +16,51 @@ const myFormatWeekday = (_locale, date) => {
 
 const CalendarComponent = ({today, setToday}) => {
     const [isEmotion, setIsEmotion] = useState(false);
-    const [hasDiaryMonth, setHasDiaryMonth] = useState([]);
+    const [diaryData, setDiaryData] = useState([]);
+
     useEffect(() => {
-        
+        handleHasDiary({year : today.getFullYear(), month : today.getMonth() + 1}); // unmount set
     }, [today]);
-    const handleDiaryMonth = async() => {
-        const data = getDiaryToMonth
+
+    const handleHasDiary = async ({year, month}) => {
+        try {
+            const response = await getDiaryToMonth({year : year, month : month});
+            if(response.status === 200){
+                setDiaryData(Object.keys(response.data));
+            }
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
+    const handleActiveStartDateChange = ({ activeStartDate, view }) => {
+        handleHasDiary({year : activeStartDate.getFullYear(), month : activeStartDate.getMonth() + 1})
     }
     return (
         <StyledCalendar isemotion={isEmotion.toString()}>
             <div className="emotion-button" onClick={() => setIsEmotion((prev) => !prev)}>
                 {isEmotion ? <EmotionSVG/> : <NumberSVG/>}
             </div>
-            <Calendar showNavigation locale="en" value={today} onChange={setToday} formatShortWeekday={myFormatWeekday} prev2Label={null} next2Label={null} formatMonthYear={(_local, date) => {
+            <Calendar showNavigation locale="en" onActiveStartDateChange={handleActiveStartDateChange} value={today} onChange={setToday} formatShortWeekday={myFormatWeekday} prev2Label={null} next2Label={null} formatMonthYear={(_local, date) => {
                 if(date.getMonth() < 10) return (`${date.getFullYear()}. 0${date.getMonth() + 1}`);
                 return(`${date.getFullYear()}. ${date.getMonth() + 1}`);
                 }}
                 tileContent={({date, view}) => {
-                    if(view === "month" && date.getDate() === 15 && isEmotion){
-                        return <img src={sadPNG}></img>
-                    }
-                    else if(view === "month" && date.getDate() === 16){
-                        return ""
-                    }
-                    else if(view === "month" && date.getDate() === 17){
-                        return "";
+                    if(view === "month"){
+                        const dateString = date.getDate().toString();
+                        if(diaryData.includes(dateString) && isEmotion){
+                            return <img src={sadPNG}></img>
+                        }
                     }
                 }} 
                 tileClassName={({date, view}) => {
                 if(view === "month"){
-                    if(date.getDate() === 15){
-                        return "hightlights emotion";
+                    const dateString = date.getDate().toString();
+                    if(diaryData.includes(dateString)){
+                        return "highlights emotion";
                     }
                 }
+                
             }}/>
         </StyledCalendar>
     );
