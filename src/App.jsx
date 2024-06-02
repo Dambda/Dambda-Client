@@ -14,6 +14,7 @@ import CalendarDetailPage from './pages/CalendarDetailPage';
 import CalendarAnalysisPage from './pages/CalendarAnalysisPage';
 
 function App() {
+  
   return (
     <>
       <ThemeProvider theme={theme}>
