@@ -5,9 +5,22 @@ import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
 import { mockData } from './mock';
 
-const SelectionModal = ({ onClick }) => {
-  const [emotionKeyword, setEmotionKeyword] = useState(mockData.emotions);
-  const [topicKeyword, setTopicKeyword] = useState(mockData.topics);
+const SelectionModal = ({ onClick, content }) => {
+  let emotoinList = [];
+  let topicList = [];
+  content.emotions.map((item, index) => {
+    index === 0 || index === 1 || index === 2
+      ? emotoinList.push({ name: item, isChecked: true })
+      : emotoinList.push({ name: item, isChecked: false });
+  });
+  content.words.map((item, index) => {
+    index === 0 || index === 1 || index === 2
+      ? topicList.push({ name: item, isChecked: true })
+      : topicList.push({ name: item, isChecked: false });
+  });
+
+  const [emotionKeyword, setEmotionKeyword] = useState(emotoinList);
+  const [topicKeyword, setTopicKeyword] = useState(topicList);
   const [emotionInputView, setEmotionInputView] = useState(false);
   const [topicInputView, setTopicInputView] = useState(false);
 
@@ -32,8 +45,6 @@ const SelectionModal = ({ onClick }) => {
           : keyword,
       ),
     );
-
-    console.log(emotionKeyword);
   };
 
   const addEmotionKeyword = () => {

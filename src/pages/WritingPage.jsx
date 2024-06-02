@@ -9,8 +9,11 @@ import LoadingModal from '../components/writing/LoadingModal';
 import SelectionModal from '../components/writing/SelectionModal';
 
 const WritingPage = () => {
+  const [content, setContent] = useState({});
   const [modalView, setModalView] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  console.log(content.emotions);
 
   return (
     <Conatiner>
@@ -19,10 +22,16 @@ const WritingPage = () => {
         <img className="backward-btn" src={backwardBtn} />
       </Link>
       <WritingMenu />
-      <WritingInput modalViewChange={setModalView} handleLoading={setLoading} />
+      <WritingInput
+        setContent={setContent}
+        setModalView={setModalView}
+        setLoading={setLoading}
+      />
       <WritingEtc />
       {loading ? <LoadingModal onClick={setModalView} /> : null}
-      {modalView ? <SelectionModal onClick={setModalView} /> : null}
+      {modalView ? (
+        <SelectionModal onClick={setModalView} content={content} />
+      ) : null}
     </Conatiner>
   );
 };
