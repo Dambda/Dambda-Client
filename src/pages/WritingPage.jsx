@@ -13,8 +13,6 @@ const WritingPage = () => {
   const [modalView, setModalView] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  console.log(content.emotions);
-
   return (
     <Conatiner>
       <Link to="/">

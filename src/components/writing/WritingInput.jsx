@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Styled from '../../styles/components/writinginput';
+import SelectionModal from '@/components/writing/SelectionModal';
 import completedIcon from '@/assets/icon/completed-icon.svg';
 import { getKeyword } from '@/apis/api';
 
@@ -12,6 +13,7 @@ const WritingInput = ({ setContent, setModalView, setLoading }) => {
       const keywords = await getKeyword(inputValue);
       setContent(keywords.content);
       setLoading(false);
+      setModalView(true); // data 불러온 후 modal 띄우기
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -20,7 +22,6 @@ const WritingInput = ({ setContent, setModalView, setLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setModalView(true);
     const inputValue = e.target[0].value;
     handleKeywordLoad(inputValue);
   };

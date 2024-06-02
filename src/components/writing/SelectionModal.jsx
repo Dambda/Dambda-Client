@@ -3,23 +3,33 @@ import { Link } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
-import { mockData } from './mock';
 
 const SelectionModal = ({ onClick, content }) => {
-  let emotoinList = [];
-  let topicList = [];
-  content.emotions.map((item, index) => {
-    index === 0 || index === 1 || index === 2
-      ? emotoinList.push({ name: item, isChecked: true })
-      : emotoinList.push({ name: item, isChecked: false });
-  });
-  content.words.map((item, index) => {
-    index === 0 || index === 1 || index === 2
-      ? topicList.push({ name: item, isChecked: true })
-      : topicList.push({ name: item, isChecked: false });
-  });
+  // let emotionList = [];
+  // let topicList = [];
 
-  const [emotionKeyword, setEmotionKeyword] = useState(emotoinList);
+  // (content.emotions || []).map((item, index) => {
+  //   index === 0 || index === 1 || index === 2
+  //     ? emotionList.push({ name: item, isChecked: true })
+  //     : emotionList.push({ name: item, isChecked: false });
+  // });
+  // (content.words || []).map((item, index) => {
+  //   index === 0 || index === 1 || index === 2
+  //     ? topicList.push({ name: item, isChecked: true })
+  //     : topicList.push({ name: item, isChecked: false });
+  // });
+
+  const emotionList = (content.emotions || []).map((item, index) => ({
+    name: item,
+    isChecked: index === 0 || index === 1 || index === 2,
+  }));
+
+  const topicList = (content.words || []).map((item, index) => ({
+    name: item,
+    isChecked: index === 0 || index === 1 || index === 2,
+  }));
+
+  const [emotionKeyword, setEmotionKeyword] = useState(emotionList);
   const [topicKeyword, setTopicKeyword] = useState(topicList);
   const [emotionInputView, setEmotionInputView] = useState(false);
   const [topicInputView, setTopicInputView] = useState(false);
