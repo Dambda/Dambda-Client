@@ -12,9 +12,6 @@ const WritingPage = () => {
   const [modalView, setModalView] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  console.log('modalView', modalView);
-  console.log('loading', loading);
-
   return (
     <Conatiner>
       <Link to="/">

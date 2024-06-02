@@ -1,23 +1,11 @@
-import axios from 'axios';
-
-const baseURL = 'https://server.mooner.dev/dambda/api/v1';
-
-const instance = axios.create({
-  baseURL: baseURL,
-  timeout: 3000,
-});
+import instance from './instance/instance';
 
 export const getKeyword = async ({ content }) => {
-  const response = await instance.post(
-    '/diaries/write/analyze',
-    {
-      content: content,
+  const data = { content };
+  const response = await instance.post('/diaries/write/analyze', data, {
+    headers: {
+      'Content-Type': 'application/json',
     },
-    {
-      headers: {
-        'Content-type': 'application/json',
-      },
-    },
-  );
+  });
   return response.data;
 };

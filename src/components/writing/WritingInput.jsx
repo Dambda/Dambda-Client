@@ -9,7 +9,7 @@ const WritingInput = ({ modalViewChange, handleLoading }) => {
   const handleKeywordLoad = async (inputValue) => {
     try {
       handleLoading(true);
-      const result = await getKeyword({ inputValue });
+      const result = await getKeyword({ content: inputValue });
       console.log(result);
       handleLoading(false);
     } catch (error) {
