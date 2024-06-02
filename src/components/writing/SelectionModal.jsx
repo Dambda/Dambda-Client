@@ -38,7 +38,6 @@ const SelectionModal = ({ onClick }) => {
 
   const addEmotionKeyword = () => {
     setEmotionInputView((prev) => !prev);
-    console.log(emotionInputView);
   };
   const addTopicKeyword = () => {
     setTopicInputView((prev) => !prev);
@@ -46,7 +45,11 @@ const SelectionModal = ({ onClick }) => {
 
   return (
     <Styled.Container>
-      <Styled.SelectionContainer>
+      <Styled.SelectionContainer
+        emotionInputView={emotionInputView}
+        topicInputView={topicInputView}
+        height="48"
+      >
         <img onClick={clickClosedBtn} className="closed-btn" src={closedBtn} />
         <div className="content">
           <div className="header">

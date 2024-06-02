@@ -10,7 +10,10 @@ import SelectionModal from '../components/writing/SelectionModal';
 
 const WritingPage = () => {
   const [modalView, setModalView] = useState(false);
-  localStorage.setItem('fold', false);
+  const [loading, setLoading] = useState(false);
+
+  console.log('modalView', modalView);
+  console.log('loading', loading);
 
   return (
     <Conatiner>
@@ -19,9 +22,9 @@ const WritingPage = () => {
         <img className="backward-btn" src={backwardBtn} />
       </Link>
       <WritingMenu />
-      <WritingInput onClick={setModalView} />
+      <WritingInput modalViewChange={setModalView} handleLoading={setLoading} />
       <WritingEtc />
-      {/* {modalView ? <LoadingModal onClick={setModalView} /> : null} */}
+      {loading ? <LoadingModal onClick={setModalView} /> : null}
       {modalView ? <SelectionModal onClick={setModalView} /> : null}
     </Conatiner>
   );

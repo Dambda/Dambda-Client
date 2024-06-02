@@ -10,7 +10,6 @@ const instance = axios.create({
 export const getKeyword = async ({ content }) => {
   const response = await instance.post(
     '/diaries/write/analyze',
-    //   'https://server.mooner.dev/llmid/api/v1/diaries/write/analyze',
     {
       content: content,
     },
@@ -22,5 +21,3 @@ export const getKeyword = async ({ content }) => {
   );
   return response.data;
 };
-
-// export default getKeyword;

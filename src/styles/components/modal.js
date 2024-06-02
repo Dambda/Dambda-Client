@@ -80,9 +80,17 @@ const LoadingContainer = styled(ContentContainer)`
 const SelectionContainer = styled(ContentContainer)`
   justify-content: center;
   align-items: center;
-  height: 604px;
+  transition: height 0.7s ease;
+  height: ${({ emotionInputView, topicInputView }) =>
+    emotionInputView && topicInputView
+      ? `604px`
+      : emotionInputView || topicInputView
+        ? `536px`
+        : `468px`};
 
   & .content {
+    position: absolute;
+    top: 40px;
     margin-bottom: 24px;
   }
 
@@ -168,6 +176,8 @@ const SelectionContainer = styled(ContentContainer)`
   }
 
   & .buttons {
+    position: absolute;
+    bottom: 32px;
     display: flex;
     justify-content: space-between;
     width: 324px;

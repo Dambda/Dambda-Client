@@ -3,24 +3,26 @@ import Styled from '../../styles/components/writinginput';
 import completedIcon from '@/assets/icon/completed-icon.svg';
 import { getKeyword } from '@/apis/api';
 
-const WritingInput = ({ onClick }) => {
+const WritingInput = ({ modalViewChange, handleLoading }) => {
   const [value, setValue] = useState('');
 
   const handleKeywordLoad = async (inputValue) => {
     try {
+      handleLoading(true);
       const result = await getKeyword({ inputValue });
       console.log(result);
+      handleLoading(false);
     } catch (error) {
       console.error(error);
+      handleLoading(false);
     }
   };
 
   const handleSubmit = (e) => {
-    const inputValue = e.target[0].value;
     e.preventDefault();
-    onClick(true);
+    modalViewChange(true);
+    const inputValue = e.target[0].value;
     handleKeywordLoad(inputValue);
-    // console.log(inputValue);
   };
 
   const handleInput = (e) => {
