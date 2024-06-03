@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Styled from '@/styles/pages/calendaranalysispage';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import RecommendTodo from '../components/RecommendTodo';
@@ -21,18 +21,66 @@ const CalendarAnalysisPage = () => {
       icon: 'gameIcon',
       text: '오늘 하루의 고생\n 게임 한판 고?',
     },
+    {
+      index: '투두',
+      icon: 'musicIcon',
+      text: '신나는 댄스곡과 함께\n 기분도 펌핑!',
+    },
+    {
+      index: '투두',
+      icon: 'drawingIcon',
+      text: '내 마음가는대로\n 그림을 그려보기',
+    },
+    {
+      index: '투두',
+      icon: 'exerciseIcon',
+      text: '신나게 운동하며\n 맘껏 활동하기!',
+    },
+    {
+      index: '투두',
+      icon: 'eatSnackIcon',
+      text: '좋아하는\n 달콤한 간식 먹기!',
+    },
+    {
+      index: '투두',
+      icon: 'eatDeliciousIcon',
+      text: '오늘 저녁은\n 맛있는 음식 먹기!',
+    },
   ];
-
   const [diaryPage, setDiaryPage] = useState(1);
   const [character, setCharacter] = useState(1);
+  const [randomNum, setRandomNum] = useState([0, 1, 2]);
+
+  const randomNumSelect = () => {
+    let arr = [];
+
+    const sameNum = (n) => {
+      return arr.find((e) => e === n);
+    };
+
+    for (let i = 0; i < 3; i++) {
+      let n = Math.floor(Math.random() * recommend.length);
+      if (!sameNum(n)) {
+        arr.push(n);
+      } else {
+        i--;
+      }
+    }
+    setRandomNum(arr);
+  };
 
   const handleDiaryPage = (e) => {
     setDiaryPage(e.target.value);
+    console.log(randomNum);
   };
 
-  const handleEmotionCharacter = (e) => {
+  const handleEmotionCharacterPage = (e) => {
     setCharacter(e.target.value);
   };
+
+  useEffect(() => {
+    randomNumSelect();
+  }, []);
   return (
     <Styled.Container>
       <header>
@@ -77,13 +125,13 @@ const CalendarAnalysisPage = () => {
               <li
                 className="character"
                 value={1}
-                onClick={handleEmotionCharacter}
+                onClick={handleEmotionCharacterPage}
                 style={{ backgroundColor: character == 1 ? '#47588C' : '' }}
               ></li>
               <li
                 className="character"
                 value={2}
-                onClick={handleEmotionCharacter}
+                onClick={handleEmotionCharacterPage}
                 style={{ backgroundColor: character == 2 ? '#47588C' : '' }}
               ></li>
             </ul>
@@ -102,19 +150,19 @@ const CalendarAnalysisPage = () => {
           <h3>추천활동</h3>
           <div className="todo-container">
             <RecommendTodo
-              index={recommend[0].index}
-              icon={recommend[0].icon}
-              text={recommend[0].text}
+              index={recommend[randomNum[0]].index}
+              icon={recommend[randomNum[0]].icon}
+              text={recommend[randomNum[0]].text}
             />
             <RecommendTodo
-              index={recommend[1].index}
-              icon={recommend[1].icon}
-              text={recommend[1].text}
+              index={recommend[randomNum[1]].index}
+              icon={recommend[randomNum[1]].icon}
+              text={recommend[randomNum[1]].text}
             />
             <RecommendTodo
-              index={recommend[2].index}
-              icon={recommend[2].icon}
-              text={recommend[2].text}
+              index={recommend[randomNum[2]].index}
+              icon={recommend[randomNum[2]].icon}
+              text={recommend[randomNum[2]].text}
             />
           </div>
         </div>
