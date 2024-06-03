@@ -9,7 +9,7 @@ const SelectionModal = ({ onClick, content }) => {
   const navigate = useNavigate();
   const emotionList = (content.emotions || []).map((item, index) => ({
     name: item,
-    isChecked: index === 0 || index === 1 || index === 2 || index === 3,
+    isChecked: index === 0 || index === 1 || index === 2,
   }));
 
   const topicList = (content.words || []).map((item, index) => ({
@@ -21,7 +21,7 @@ const SelectionModal = ({ onClick, content }) => {
   const [topicKeyword, setTopicKeyword] = useState(topicList);
   const [emotionInputView, setEmotionInputView] = useState(false);
   const [topicInputView, setTopicInputView] = useState(false);
-
+  const [id, setID] = useState(-1);
   const clickClosedBtn = () => {
     onClick(false);
   };
@@ -53,12 +53,9 @@ const SelectionModal = ({ onClick, content }) => {
   };
 
   const idLoad = async (emotions, words) => {
-    console.log(emotions);
-    console.log(words);
-
     try {
       const id = await getID(emotions, words);
-      console.log(id);
+      setID(id);
     } catch (error) {
       console.error(error);
     }
@@ -67,7 +64,7 @@ const SelectionModal = ({ onClick, content }) => {
   const moveToAnalysisPage = () => {
     navigate('/calendar/analysis', {
       state: {
-        content: content,
+        id: id,
       },
     });
   };

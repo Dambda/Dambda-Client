@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Styled from '@/styles/pages/calendaranalysispage';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import RecommendTodo from '../components/RecommendTodo';
 import sadCharacter from '@/assets/emotion-character/sadness.png';
 
 const CalendarAnalysisPage = () => {
+  const location = useLocation();
   const recommend = [
     {
       index: '투두',
@@ -80,6 +82,7 @@ const CalendarAnalysisPage = () => {
 
   useEffect(() => {
     randomNumSelect();
+    console.log(location.state.id);
   }, []);
   return (
     <Styled.Container>
