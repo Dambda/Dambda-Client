@@ -4,6 +4,7 @@ import Styled from '@/styles/pages/calendaranalysispage';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import RecommendTodo from '../components/RecommendTodo';
 import sadCharacter from '@/assets/emotion-character/sadness.png';
+import { getAnaylsis } from '@/apis/api';
 
 const CalendarAnalysisPage = () => {
   const location = useLocation();
@@ -80,9 +81,18 @@ const CalendarAnalysisPage = () => {
     setCharacter(e.target.value);
   };
 
+  const handleLoad = async (id) => {
+    try {
+      const result = await getAnaylsis(id);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
+    const id = location.state.id;
     randomNumSelect();
-    console.log(location.state.id);
+    handleLoad(id);
   }, []);
   return (
     <Styled.Container>

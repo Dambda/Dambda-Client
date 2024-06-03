@@ -25,3 +25,12 @@ export const getID = async (emotions, words) => {
   );
   return response.data;
 };
+
+export const getAnaylsis = async (id) => {
+  const response = await instance.get(`/diaries/${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.data;
+};
