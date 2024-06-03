@@ -7,7 +7,7 @@ import Todaystory from "../components/home/Todaystory";
 
 const HomePage = () => {
     return (
-        <div style={{width : "100vw", display : "flex", flexDirection : "column", alignItems : "center"}}>
+        <div style={{width : "100vw", height : "1500px",display : "flex", flexDirection : "column", alignItems : "center"}}>
             <HomeBanner />
             <Container>
                 <Recommend/>
