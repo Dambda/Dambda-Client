@@ -1,15 +1,36 @@
-import { React, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { React, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
-import { mockData } from './mock';
+import { getID } from '@/apis/api';
 
-const SelectionModal = ({ onClick }) => {
-  const [emotionKeyword, setEmotionKeyword] = useState(mockData.emotions);
-  const [topicKeyword, setTopicKeyword] = useState(mockData.topics);
+const SelectionModal = ({ onClick, content }) => {
+  const navigate = useNavigate();
+  const emotionList = (content.emotions || []).map((item, index) => ({
+    name: item,
+    isChecked: index === 0 || index === 1 || index === 2 || index === 3,
+  }));
+
+  const topicList = (content.words || []).map((item, index) => ({
+    name: item,
+    isChecked: index === 0 || index === 1 || index === 2,
+  }));
+
+  const [emotionKeyword, setEmotionKeyword] = useState(emotionList);
+  const [topicKeyword, setTopicKeyword] = useState(topicList);
+  const [emotionInputView, setEmotionInputView] = useState(false);
+  const [topicInputView, setTopicInputView] = useState(false);
+
   const clickClosedBtn = () => {
     onClick(false);
+  };
+
+  const addEmotionKeyword = () => {
+    setEmotionInputView((prev) => !prev);
+  };
+  const addTopicKeyword = () => {
+    setTopicInputView((prev) => !prev);
   };
 
   const handleKeywordClick = (item) => {
@@ -29,13 +50,48 @@ const SelectionModal = ({ onClick }) => {
           : keyword,
       ),
     );
-
-    console.log(emotionKeyword);
   };
+
+  const idLoad = async (emotions, words) => {
+    console.log(emotions);
+    console.log(words);
+
+    try {
+      const id = await getID(emotions, words);
+      console.log(id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const moveToAnalysisPage = () => {
+    navigate('/calendar/analysis', {
+      state: {
+        content: content,
+      },
+    });
+  };
+
+  useEffect(() => {
+    const emotions = [];
+    const words = [];
+    emotionKeyword.map((item) => {
+      item.isChecked ? emotions.push(item.name) : null;
+    });
+    topicKeyword.map((item) => {
+      item.isChecked ? words.push(item.name) : null;
+    });
+
+    idLoad(emotions, words);
+  }, [emotionKeyword, topicKeyword]);
 
   return (
     <Styled.Container>
-      <Styled.SelectionContainer>
+      <Styled.SelectionContainer
+        emotionInputView={emotionInputView}
+        topicInputView={topicInputView}
+        height="48"
+      >
         <img onClick={clickClosedBtn} className="closed-btn" src={closedBtn} />
         <div className="content">
           <div className="header">
@@ -59,8 +115,14 @@ const SelectionModal = ({ onClick }) => {
                   onClick={handleKeywordClick}
                 />
                 <form>
-                  <button className="add-btn" />
-                  <input placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요" />
+                  <button
+                    className="add-btn"
+                    type="button"
+                    onClick={addEmotionKeyword}
+                  />
+                  {emotionInputView && (
+                    <input placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요" />
+                  )}
                 </form>
               </div>
             </div>
@@ -77,11 +139,17 @@ const SelectionModal = ({ onClick }) => {
                   onClick={handleKeywordClick}
                 />
                 <form>
-                  <button className="add-btn" />
-                  <input
-                    className="topic-input"
-                    placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                  <button
+                    className="add-btn"
+                    type="button"
+                    onClick={addTopicKeyword}
                   />
+                  {topicInputView && (
+                    <input
+                      className="topic-input"
+                      placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                    />
+                  )}
                 </form>
               </div>
             </div>
@@ -90,8 +158,11 @@ const SelectionModal = ({ onClick }) => {
 
         <div className="buttons">
           <button className="unselected-btn">미선택</button>
-          <button className="selection-complete-btn">
-            <Link to="/calendar/analysis">선택 완료</Link>
+          <button
+            className="selection-complete-btn"
+            onClick={moveToAnalysisPage}
+          >
+            선택 완료
           </button>
         </div>
       </Styled.SelectionContainer>

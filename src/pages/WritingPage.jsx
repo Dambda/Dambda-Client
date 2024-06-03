@@ -9,7 +9,9 @@ import LoadingModal from '../components/writing/LoadingModal';
 import SelectionModal from '../components/writing/SelectionModal';
 
 const WritingPage = () => {
+  const [content, setContent] = useState({});
   const [modalView, setModalView] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Conatiner>
@@ -18,10 +20,16 @@ const WritingPage = () => {
         <img className="backward-btn" src={backwardBtn} />
       </Link>
       <WritingMenu />
-      <WritingInput onClick={setModalView} />
+      <WritingInput
+        setContent={setContent}
+        setModalView={setModalView}
+        setLoading={setLoading}
+      />
       <WritingEtc />
-      {/* {modalView ? <LoadingModal onClick={setModalView} /> : null} */}
-      {modalView ? <SelectionModal onClick={setModalView} /> : null}
+      {loading ? <LoadingModal onClick={setModalView} /> : null}
+      {modalView ? (
+        <SelectionModal onClick={setModalView} content={content} />
+      ) : null}
     </Conatiner>
   );
 };
