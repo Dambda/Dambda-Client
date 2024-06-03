@@ -12,3 +12,16 @@ export const getKeyword = async (inputValue) => {
   );
   return response.data;
 };
+
+export const getID = async (emotions, words) => {
+  const response = await instance.post(
+    '/diaries/write/confirm',
+    { emotions, words },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  return response.data;
+};

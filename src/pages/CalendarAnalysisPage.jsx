@@ -60,15 +60,12 @@ const CalendarAnalysisPage = () => {
 
     for (let i = 0; i < 3; i++) {
       let n = Math.floor(Math.random() * recommend.length);
-      console.log(sameNum(n));
       if (!sameNum(n)) {
         arr.push(n);
       } else {
         i--;
       }
     }
-
-    // console.log(arr);
     setRandomNum(arr);
   };
 
@@ -77,7 +74,7 @@ const CalendarAnalysisPage = () => {
     console.log(randomNum);
   };
 
-  const handleEmotionCharacter = (e) => {
+  const handleEmotionCharacterPage = (e) => {
     setCharacter(e.target.value);
   };
 
@@ -128,13 +125,13 @@ const CalendarAnalysisPage = () => {
               <li
                 className="character"
                 value={1}
-                onClick={handleEmotionCharacter}
+                onClick={handleEmotionCharacterPage}
                 style={{ backgroundColor: character == 1 ? '#47588C' : '' }}
               ></li>
               <li
                 className="character"
                 value={2}
-                onClick={handleEmotionCharacter}
+                onClick={handleEmotionCharacterPage}
                 style={{ backgroundColor: character == 2 ? '#47588C' : '' }}
               ></li>
             </ul>

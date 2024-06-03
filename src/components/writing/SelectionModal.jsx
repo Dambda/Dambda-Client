@@ -1,27 +1,15 @@
-import { React, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { React, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
+import { getID } from '@/apis/api';
 
 const SelectionModal = ({ onClick, content }) => {
-  // let emotionList = [];
-  // let topicList = [];
-
-  // (content.emotions || []).map((item, index) => {
-  //   index === 0 || index === 1 || index === 2
-  //     ? emotionList.push({ name: item, isChecked: true })
-  //     : emotionList.push({ name: item, isChecked: false });
-  // });
-  // (content.words || []).map((item, index) => {
-  //   index === 0 || index === 1 || index === 2
-  //     ? topicList.push({ name: item, isChecked: true })
-  //     : topicList.push({ name: item, isChecked: false });
-  // });
-
+  const navigate = useNavigate();
   const emotionList = (content.emotions || []).map((item, index) => ({
     name: item,
-    isChecked: index === 0 || index === 1 || index === 2,
+    isChecked: index === 0 || index === 1 || index === 2 || index === 3,
   }));
 
   const topicList = (content.words || []).map((item, index) => ({
@@ -36,6 +24,13 @@ const SelectionModal = ({ onClick, content }) => {
 
   const clickClosedBtn = () => {
     onClick(false);
+  };
+
+  const addEmotionKeyword = () => {
+    setEmotionInputView((prev) => !prev);
+  };
+  const addTopicKeyword = () => {
+    setTopicInputView((prev) => !prev);
   };
 
   const handleKeywordClick = (item) => {
@@ -57,12 +52,38 @@ const SelectionModal = ({ onClick, content }) => {
     );
   };
 
-  const addEmotionKeyword = () => {
-    setEmotionInputView((prev) => !prev);
+  const idLoad = async (emotions, words) => {
+    console.log(emotions);
+    console.log(words);
+
+    try {
+      const id = await getID(emotions, words);
+      console.log(id);
+    } catch (error) {
+      console.error(error);
+    }
   };
-  const addTopicKeyword = () => {
-    setTopicInputView((prev) => !prev);
+
+  const moveToAnalysisPage = () => {
+    navigate('/calendar/analysis', {
+      state: {
+        content: content,
+      },
+    });
   };
+
+  useEffect(() => {
+    const emotions = [];
+    const words = [];
+    emotionKeyword.map((item) => {
+      item.isChecked ? emotions.push(item.name) : null;
+    });
+    topicKeyword.map((item) => {
+      item.isChecked ? words.push(item.name) : null;
+    });
+
+    idLoad(emotions, words);
+  }, [emotionKeyword, topicKeyword]);
 
   return (
     <Styled.Container>
@@ -137,8 +158,11 @@ const SelectionModal = ({ onClick, content }) => {
 
         <div className="buttons">
           <button className="unselected-btn">미선택</button>
-          <button className="selection-complete-btn">
-            <Link to="/calendar/analysis">선택 완료</Link>
+          <button
+            className="selection-complete-btn"
+            onClick={moveToAnalysisPage}
+          >
+            선택 완료
           </button>
         </div>
       </Styled.SelectionContainer>

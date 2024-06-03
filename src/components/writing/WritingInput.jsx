@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Styled from '../../styles/components/writinginput';
-import SelectionModal from '@/components/writing/SelectionModal';
 import completedIcon from '@/assets/icon/completed-icon.svg';
 import { getKeyword } from '@/apis/api';
 
