@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
@@ -65,25 +65,27 @@ const SelectionModal = ({ onClick, content }) => {
 
   const moveToAnalysisPage = () => {
     // 키워드 한꺼번에 모아서 보내기
+    console.log(selectedEmotions);
+    console.log(selectedTopics);
+    idLoad(selectedEmotions, selectedTopics);
+
+    if (id !== -1) {
+      navigate('/calendar/analysis', {
+        state: {
+          id: id,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
     setSelectedEmotions(
       emotionKeyword.filter((item) => item.isChecked).map((item) => item.name),
     );
     setSelectedTopics(
       topicKeyword.filter((item) => item.isChecked).map((item) => item.name),
     );
-    console.log(selectedEmotions);
-    console.log(selectedTopics);
-
-    // navigate('/calendar/analysis', {
-    //   state: {
-    //     id: id,
-    //   },
-    // });
-  };
-
-  // useEffect(() => {
-
-  // }, [emotionKeyword, topicKeyword]);
+  }, [emotionKeyword, topicKeyword]);
 
   return (
     <Styled.Container>
