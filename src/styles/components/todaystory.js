@@ -41,6 +41,11 @@ const Container = styled.div`
             font-weight: 600;
         }
     }
+    .today-footer-writing-button {
+        &:hover {
+            transform: scale(1.025);
+        }
+    }
 `;
 
 

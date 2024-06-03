@@ -21,6 +21,9 @@ const CalendarContent = ({today}) => {
                 setDiaryData(response);
                 setDiaryNum(0);
             }
+            else {
+                setDiaryData(response)
+            }
         } catch(e) {
             console.error(e);
         }
