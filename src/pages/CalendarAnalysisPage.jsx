@@ -56,6 +56,7 @@ const CalendarAnalysisPage = () => {
   const [diaryPage, setDiaryPage] = useState(1);
   const [character, setCharacter] = useState(1);
   const [randomNum, setRandomNum] = useState([0, 1, 2]);
+  const [data, setData] = useState();
 
   const randomNumSelect = () => {
     let arr = [];
@@ -87,6 +88,7 @@ const CalendarAnalysisPage = () => {
   const handleLoad = async (id) => {
     try {
       const result = await getAnaylsis(id);
+      setData(result);
       console.log(result);
     } catch (error) {
       console.error(error);
@@ -155,11 +157,19 @@ const CalendarAnalysisPage = () => {
           </div>
 
           <div className="contents-container">
-            <p className="comment">
-              이른 아침부터 많은 일이 있던 날이었네요. <br />
-              지금 이 순간만큼은 편히 쉬어봐요
-            </p>
-            <div className="keywords"></div>
+            <p className="feedback">{data && data.diary.feedback}</p>
+            <div className="keyword-container">
+              <ul>
+                {data &&
+                  data.diary.words.map((item, index) => {
+                    return (
+                      <li key={index} className="keyword">
+                        {item}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
           </div>
         </div>
 

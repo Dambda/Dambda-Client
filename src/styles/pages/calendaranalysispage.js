@@ -99,12 +99,36 @@ const Container = styled.div`
     }
 
     .contents-container {
-      .comment {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .feedback {
+        width: 400px;
         margin-bottom: 16px;
-        line-height: 1.3em;
+        line-height: 1.5em;
         font-size: 20px;
         font-weight: 500;
         text-align: center;
+      }
+
+      ul {
+        display: flex;
+        justify-content: space-between;
+        width: 195px;
+      }
+
+      .keyword {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 57px;
+        height: 32px;
+        border-radius: 300px;
+        border: 1px solid ${theme.color.primary};
+        font-size: 13px;
+        font-weight: 500;
+        background-color: ${theme.color.back2};
+        color: ${theme.color.primary};
       }
     }
 
@@ -120,6 +144,7 @@ const Container = styled.div`
         justify-content: space-between;
         width: 552px;
         height: 168px;
+        margin: 0 auto;
       }
     }
   }
