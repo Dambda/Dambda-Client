@@ -22,6 +22,8 @@ const SelectionModal = ({ onClick, content }) => {
   const [emotionInputView, setEmotionInputView] = useState(false);
   const [topicInputView, setTopicInputView] = useState(false);
   const [id, setID] = useState(-1);
+  const [selectedEmotions, setSelectedEmotions] = useState([]);
+  const [selectedTopics, setSelectedTopics] = useState([]);
   const clickClosedBtn = () => {
     onClick(false);
   };
@@ -52,9 +54,9 @@ const SelectionModal = ({ onClick, content }) => {
     );
   };
 
-  const idLoad = async (emotions, words) => {
+  const idLoad = async (selectedEmotions, selectedTopics) => {
     try {
-      const id = await getID(emotions, words);
+      const id = await getID(selectedEmotions, selectedTopics);
       setID(id);
     } catch (error) {
       console.error(error);
@@ -62,25 +64,26 @@ const SelectionModal = ({ onClick, content }) => {
   };
 
   const moveToAnalysisPage = () => {
-    navigate('/calendar/analysis', {
-      state: {
-        id: id,
-      },
-    });
+    // 키워드 한꺼번에 모아서 보내기
+    setSelectedEmotions(
+      emotionKeyword.filter((item) => item.isChecked).map((item) => item.name),
+    );
+    setSelectedTopics(
+      topicKeyword.filter((item) => item.isChecked).map((item) => item.name),
+    );
+    console.log(selectedEmotions);
+    console.log(selectedTopics);
+
+    // navigate('/calendar/analysis', {
+    //   state: {
+    //     id: id,
+    //   },
+    // });
   };
 
-  useEffect(() => {
-    const emotions = [];
-    const words = [];
-    emotionKeyword.map((item) => {
-      item.isChecked ? emotions.push(item.name) : null;
-    });
-    topicKeyword.map((item) => {
-      item.isChecked ? words.push(item.name) : null;
-    });
+  // useEffect(() => {
 
-    idLoad(emotions, words);
-  }, [emotionKeyword, topicKeyword]);
+  // }, [emotionKeyword, topicKeyword]);
 
   return (
     <Styled.Container>

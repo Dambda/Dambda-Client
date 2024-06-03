@@ -89,6 +89,7 @@ const CalendarAnalysisPage = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     const id = location.state.id;
     randomNumSelect();
