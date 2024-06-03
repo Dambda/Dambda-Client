@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Styled from '@/styles/pages/calendaranalysispage';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import RecommendTodo from '../components/RecommendTodo';
 import sadCharacter from '@/assets/emotion-character/sadness.png';
+import happinessCharacter from '@/assets/emotion-character/happiness.png';
+import angerCharacter from '@/assets/emotion-character/anger.png';
+import anxietyCharacter from '@/assets/emotion-character/anxiety.png';
+import { getAnaylsis } from '@/apis/api';
 
 const CalendarAnalysisPage = () => {
+  const location = useLocation();
   const recommend = [
     {
       index: '투두',
@@ -78,8 +84,19 @@ const CalendarAnalysisPage = () => {
     setCharacter(e.target.value);
   };
 
+  const handleLoad = async (id) => {
+    try {
+      const result = await getAnaylsis(id);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
+    const id = location.state.id;
     randomNumSelect();
+    handleLoad(id);
   }, []);
   return (
     <Styled.Container>

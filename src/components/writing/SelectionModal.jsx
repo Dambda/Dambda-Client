@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
@@ -9,7 +9,7 @@ const SelectionModal = ({ onClick, content }) => {
   const navigate = useNavigate();
   const emotionList = (content.emotions || []).map((item, index) => ({
     name: item,
-    isChecked: index === 0 || index === 1 || index === 2 || index === 3,
+    isChecked: index === 0 || index === 1 || index === 2,
   }));
 
   const topicList = (content.words || []).map((item, index) => ({
@@ -21,7 +21,9 @@ const SelectionModal = ({ onClick, content }) => {
   const [topicKeyword, setTopicKeyword] = useState(topicList);
   const [emotionInputView, setEmotionInputView] = useState(false);
   const [topicInputView, setTopicInputView] = useState(false);
-
+  const [id, setID] = useState(-1);
+  const [selectedEmotions, setSelectedEmotions] = useState([]);
+  const [selectedTopics, setSelectedTopics] = useState([]);
   const clickClosedBtn = () => {
     onClick(false);
   };
@@ -52,37 +54,41 @@ const SelectionModal = ({ onClick, content }) => {
     );
   };
 
-  const idLoad = async (emotions, words) => {
-    console.log(emotions);
-    console.log(words);
-
+  const idLoad = async (selectedEmotions, selectedTopics) => {
     try {
-      const id = await getID(emotions, words);
-      console.log(id);
+      const id = await getID(selectedEmotions, selectedTopics);
+      setID(id);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const moveToAnalysisPage = () => {
-    navigate('/calendar/analysis', {
-      state: {
-        content: content,
-      },
-    });
+  const moveToAnalysisPage = async () => {
+    // 키워드 한꺼번에 모아서 보내기
+    console.log(id);
+    console.log(selectedEmotions);
+    console.log(selectedTopics);
+    await idLoad(selectedEmotions, selectedTopics);
+    console.log(id);
   };
 
   useEffect(() => {
-    const emotions = [];
-    const words = [];
-    emotionKeyword.map((item) => {
-      item.isChecked ? emotions.push(item.name) : null;
-    });
-    topicKeyword.map((item) => {
-      item.isChecked ? words.push(item.name) : null;
-    });
+    if (id !== -1) {
+      navigate('/calendar/analysis', {
+        state: {
+          id: id,
+        },
+      });
+    }
+  }, [id]);
 
-    idLoad(emotions, words);
+  useEffect(() => {
+    setSelectedEmotions(
+      emotionKeyword.filter((item) => item.isChecked).map((item) => item.name),
+    );
+    setSelectedTopics(
+      topicKeyword.filter((item) => item.isChecked).map((item) => item.name),
+    );
   }, [emotionKeyword, topicKeyword]);
 
   return (
