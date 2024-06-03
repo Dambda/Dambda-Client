@@ -3,6 +3,7 @@ import SetStatisticsData from "../components/statistic/SetStatisticsData";
 import WordStatistics from "../components/statistic/WordStatistics";
 import NivoComponents from "../components/statistic/NivoComponents";
 import KeywordComponents from "../components/statistic/KeywordComponents";
+import CharacterComponents from "../components/statistic/CharacterComponents";
 
 const StatisticsPage = () => {
     const [date, setDate] = useState([new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()]);
@@ -21,6 +22,7 @@ const StatisticsPage = () => {
                 <WordStatistics date={date} report={report}/>
                 <NivoComponents date={date} base={base} setReport={setReport}/>
                 <KeywordComponents/>
+                <CharacterComponents/>
             </div>
         </div>
     )

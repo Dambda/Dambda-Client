@@ -27,6 +27,22 @@ const Container = styled.div`
             top: -20px;
             left: 200px;
         }
+        .titlekeyword-info {
+            background-color: #ffffff;
+            position: absolute;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.14);
+            width: 180px;
+            left: -155px;
+            top: 30px;
+            z-index: 10;
+            border-radius: 4px;
+            padding: 5px 12px;
+            & > span {
+                font-size: 12px;
+                line-height: 18px;
+            }
+            
+        }
         & > .text-mining {
             width: 350px;
             height: 200px;

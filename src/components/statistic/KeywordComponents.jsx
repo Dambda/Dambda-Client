@@ -4,7 +4,7 @@ import TitleKeyword from "./TitleKeyword";
 
 const KeywordComponents = () => {
     return (
-        <div style={{display : "flex", justifyContent : "space-between"}}>
+        <div style={{display : "flex", justifyContent : "center", gap : "24px"}}>
             <EmotionKeyword/>
             <TitleKeyword/>
         </div>
