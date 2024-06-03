@@ -4,6 +4,9 @@ import Styled from '@/styles/pages/calendaranalysispage';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import RecommendTodo from '../components/RecommendTodo';
 import sadCharacter from '@/assets/emotion-character/sadness.png';
+import happinessCharacter from '@/assets/emotion-character/happiness.png';
+import angerCharacter from '@/assets/emotion-character/anger.png';
+import anxietyCharacter from '@/assets/emotion-character/anxiety.png';
 import { getAnaylsis } from '@/apis/api';
 
 const CalendarAnalysisPage = () => {

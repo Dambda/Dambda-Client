@@ -63,12 +63,16 @@ const SelectionModal = ({ onClick, content }) => {
     }
   };
 
-  const moveToAnalysisPage = () => {
+  const moveToAnalysisPage = async () => {
     // 키워드 한꺼번에 모아서 보내기
+    console.log(id);
     console.log(selectedEmotions);
     console.log(selectedTopics);
-    idLoad(selectedEmotions, selectedTopics);
+    await idLoad(selectedEmotions, selectedTopics);
+    console.log(id);
+  };
 
+  useEffect(() => {
     if (id !== -1) {
       navigate('/calendar/analysis', {
         state: {
@@ -76,7 +80,7 @@ const SelectionModal = ({ onClick, content }) => {
         },
       });
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     setSelectedEmotions(
