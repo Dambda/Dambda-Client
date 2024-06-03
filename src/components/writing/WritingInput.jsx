@@ -1,13 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Styled from '../../styles/components/writinginput';
 import completedIcon from '@/assets/icon/completed-icon.svg';
+import { getKeyword } from '@/apis/api';
 
-const WritingInput = ({ onClick }) => {
+const WritingInput = ({ setContent, setModalView, setLoading }) => {
   const [value, setValue] = useState('');
+
+  const handleKeywordLoad = async (inputValue) => {
+    try {
+      setLoading(true);
+      const keywords = await getKeyword(inputValue);
+      setContent(keywords.content);
+      setLoading(false);
+      setModalView(true); // data 불러온 후 modal 띄우기
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onClick(true);
+    const inputValue = e.target[0].value;
+    handleKeywordLoad(inputValue);
   };
 
   const handleInput = (e) => {

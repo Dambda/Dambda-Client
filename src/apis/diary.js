@@ -28,5 +28,30 @@ export const getDiaryToMonth = async({year, month}) => {
         }
     })
 
-    return response.data;
+    return response;
+}
+
+
+export const getDiaryComment = async({id}) => {
+    const response = await instance.get(`/diaries/${id}/comments`, {
+        headers : {
+            'Content-Type' : 'application/json'
+        }
+    })
+
+    return response;
+}
+
+export const postDiaryComment = async({id, content}) => {
+    const request = await instance.post(`/diaries/${id}/comments`, 
+    {
+        content : content
+    }, 
+    {
+        headers : {
+            'Content-Type' : 'application/json'
+        }
+    })
+
+    return request;
 }
