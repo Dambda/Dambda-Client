@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import Styled from '@/styles/pages/calendaranalysispage';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import RecommendTodo from '../components/RecommendTodo';
-import sadCharacter from '@/assets/emotion-character/sadness.png';
-import happinessCharacter from '@/assets/emotion-character/happiness.png';
-import angerCharacter from '@/assets/emotion-character/anger.png';
-import anxietyCharacter from '@/assets/emotion-character/anxiety.png';
+import happyImg from '@/assets/emotion-character/happiness.png';
+import sadImg from '@/assets/emotion-character/sadness.png';
+import angerImg from '@/assets/emotion-character/anger.png';
+import anxiousImg from '@/assets/emotion-character/anxiety.png';
 import { getAnaylsis } from '@/apis/api';
 
 const CalendarAnalysisPage = () => {
@@ -54,9 +54,42 @@ const CalendarAnalysisPage = () => {
     },
   ];
   const [diaryPage, setDiaryPage] = useState(1);
-  const [character, setCharacter] = useState(1);
+  const [characterPage, setCharacterPage] = useState(1);
   const [randomNum, setRandomNum] = useState([0, 1, 2]);
   const [data, setData] = useState();
+  const [character, setCharacter] = useState(happyImg);
+
+  const getMaxEmotion = (emotionValues) => {
+    let maxKey = null;
+    let maxValue = -999;
+
+    for (const [key, value] of Object.entries(emotionValues)) {
+      if (value > maxValue) {
+        maxValue = value;
+        maxKey = key;
+      }
+    }
+
+    let characterImg;
+    switch (maxKey) {
+      case 'happy':
+        characterImg = happyImg;
+        break;
+      case 'sad':
+        characterImg = sadImg;
+        break;
+      case 'anger':
+        characterImg = angerImg;
+        break;
+      case 'anxious':
+        characterImg = anxiousImg;
+        break;
+      default:
+        characterImg = sadImg;
+    }
+
+    setCharacter(characterImg);
+  };
 
   const randomNumSelect = () => {
     let arr = [];
@@ -82,13 +115,14 @@ const CalendarAnalysisPage = () => {
   };
 
   const handleEmotionCharacterPage = (e) => {
-    setCharacter(e.target.value);
+    setCharacterPage(e.target.value);
   };
 
   const handleLoad = async (id) => {
     try {
       const result = await getAnaylsis(id);
       setData(result);
+      getMaxEmotion(result.diary.values);
       console.log(result);
     } catch (error) {
       console.error(error);
@@ -136,7 +170,7 @@ const CalendarAnalysisPage = () => {
         <div className="analysis">
           <div className="character-container">
             <img
-              src={sadCharacter}
+              src={character}
               className="emotion-character"
               alt="emotion-character"
             />
@@ -145,13 +179,13 @@ const CalendarAnalysisPage = () => {
                 className="character"
                 value={1}
                 onClick={handleEmotionCharacterPage}
-                style={{ backgroundColor: character == 1 ? '#47588C' : '' }}
+                style={{ backgroundColor: characterPage == 1 ? '#47588C' : '' }}
               ></li>
               <li
                 className="character"
                 value={2}
                 onClick={handleEmotionCharacterPage}
-                style={{ backgroundColor: character == 2 ? '#47588C' : '' }}
+                style={{ backgroundColor: characterPage == 2 ? '#47588C' : '' }}
               ></li>
             </ul>
           </div>
