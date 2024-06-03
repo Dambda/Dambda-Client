@@ -7,10 +7,10 @@ const Container = styled.div`
         justify-content: center;
         & > span {
             font-size: 24px;
-            font-weight: bold;
+            font-weight: 600;
         }
         align-items: center;
-        gap: 50px;
+        gap: 30px;
     }
 
     .setstatistics-select {

@@ -17,12 +17,14 @@ const StatisticsPage = () => {
 
     return (
         <div style={{display : "flex", justifyContent : "center"}}>
-            <div style={{width : "1000px", display : "flex", flexDirection : "column", gap : "50px"}}>
+            <div style={{width : "1000px", display : "flex", flexDirection : "column", gap : "24px"}}>
                 <SetStatisticsData date={date} base = {base} setDate={setDate} setBase={setBase}/>
                 <WordStatistics date={date} report={report}/>
-                <NivoComponents date={date} base={base} setReport={setReport}/>
-                <KeywordComponents/>
-                <CharacterComponents/>
+                <div style={{display : "flex", flexDirection : "column", gap : "64px"}}>
+                    <NivoComponents date={date} base={base} setReport={setReport}/>
+                    <KeywordComponents/>
+                    <CharacterComponents date={date} base={base}/>
+                </div>
             </div>
         </div>
     )
