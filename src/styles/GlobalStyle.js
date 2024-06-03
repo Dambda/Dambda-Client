@@ -51,6 +51,7 @@ const GlobalStyles = createGlobalStyle`
 
     #root {
         min-width: 1440px;
+        min-height: 810px;
     }
 `;
 

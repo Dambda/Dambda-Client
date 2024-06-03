@@ -19,10 +19,9 @@ const Todaystory = () => {
 
     const handleGetDiary = async () => {
         try {
-            //const today = new Date();
-            //const data = await getDiaryToDate({year : today.getFullYear(), month : today.getMonth() + 1, date : today.getDate()})
-            const data = await getDiaryToDate({year : 2024, month : 5, date : 18})
-
+            const today = new Date();
+            const data = await getDiaryToDate({year : today.getFullYear(), month : today.getMonth() + 1, date : today.getDate()})
+        
             if(data){
                 setDiaryData(data);
             }
@@ -35,7 +34,7 @@ const Todaystory = () => {
             <div className="h3">
                 오늘의 이야기
             </div>
-            <div>
+            <div style={{display : "flex", flexDirection : "column", gap : "10px"}}>
                 {
                     diaryData.length === 0 ? "" :
                     diaryData.map((data, index) => {
@@ -51,7 +50,7 @@ const Todaystory = () => {
                 {
                     diaryData.length === 0 ? <span>앗! 아직 오늘의 이야기를 들려주지 않았어요.</span> : <span>또 다른 일도 있었나요?</span>
                 }
-                <button onClick={() => navigate('writing')}>
+                <button onClick={() => navigate('writing')} className="today-footer-writing-button">
                     <span>일기 작성하기</span>
                     <BtniconSVG/>
                 </button>
