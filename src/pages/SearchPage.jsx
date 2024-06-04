@@ -37,32 +37,24 @@ const SearchPage = () => {
           #을 입력하여 감정을 기반으로 일기를 찾을 수 있어요
         </h2>
       </header>
+
       <div className="keyword-container">
         <div className="emotion-keywords">
           <h3>그동안 자주 사용한 감정 키워드</h3>
-          <ul>
+          <ul className="keywords">
             {emotionKeywords.map((item, index) => {
-              return (
-                <li key={index} className="keyword">
-                  {item}
-                </li>
-              );
+              return <li key={index}>{item}</li>;
             })}
           </ul>
         </div>
         <div className="topic-keywords">
           <h3>그동안 자주 사용한 주제 키워드</h3>
-          <ul>
+          <ul className="keywords">
             {topicKeywords.map((item, index) => {
-              return (
-                <li key={index} className="keyword">
-                  {item}
-                </li>
-              );
+              return <li key={index}>{item}</li>;
             })}
           </ul>
         </div>
-        <div className="topic-keywords"></div>
       </div>
     </Container>
   );
