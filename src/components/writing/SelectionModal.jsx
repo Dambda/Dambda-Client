@@ -63,13 +63,9 @@ const SelectionModal = ({ onClick, content }) => {
     }
   };
 
-  const moveToAnalysisPage = async () => {
+  const moveToAnalysisPage = () => {
     // 키워드 한꺼번에 모아서 보내기
-    console.log(id);
-    console.log(selectedEmotions);
-    console.log(selectedTopics);
-    await idLoad(selectedEmotions, selectedTopics);
-    console.log(id);
+    idLoad(selectedEmotions, selectedTopics);
   };
 
   useEffect(() => {
