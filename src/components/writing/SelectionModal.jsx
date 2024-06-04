@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
-import { getID } from '@/apis/api';
+import { getID, getAnaylsis } from '@/apis/api';
+
 
 const SelectionModal = ({ onClick, content }) => {
   const navigate = useNavigate();
@@ -70,10 +71,11 @@ const SelectionModal = ({ onClick, content }) => {
 
   useEffect(() => {
     if (id !== -1) {
-      navigate('/calendar/analysis', {
-        state: {
-          id: id,
-        },
+      const today = new Date();
+      navigate(`/calendar/detail/${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`, {
+        state : {
+            diaryNum : 0
+        }
       });
     }
   }, [id]);
