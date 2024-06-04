@@ -29,6 +29,7 @@ const Todaystory = () => {
             console.error(e);
         }
     }
+    
     return (
         <Container>
             <div className="h3">
@@ -39,8 +40,8 @@ const Todaystory = () => {
                     diaryData.length === 0 ? "" :
                     diaryData.map((data, index) => {
                         return(
-                            <SimpleDiary key={index} width={1000} height={200} fontSize={16} text={data.diary.content} commentCount={data.commentCount
-                            } />
+                            <SimpleDiary key={index} width={1000} height={200} fontSize={16} text={data.diary.content} commentCount={data.commentCount 
+                            } diaryNum={index}/>
                         );
                     })
                     
