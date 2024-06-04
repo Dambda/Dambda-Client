@@ -1,5 +1,5 @@
 import Happy from "@/assets/emotion-character/happiness.png";
-import Sad from "@/assets/emotion-character/sadness.png";
+import sad from "../../assets/emotion-character/sadness.png";
 import Angry from "@/assets/emotion-character/anger.png";
 import Anxiety from "@/assets/emotion-character/anxiety.png";
 import Container from "../../styles/components/analysis";
@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 import { recommend } from "../../constants/analysis";
 import Face from "@/assets/face-big.png";
 
-const EmotionCharacters = [Happy, Sad. Angry, Anxiety];
-const EmotionText = ["기쁜", "슬픈", "화난", "불안한"];
+const EmotionCharacters = [Happy, sad, Angry, Anxiety];
+const EmotionText = ["기쁜", "슬픈", "화난", "불안"];
 
 function findIndexOfMax(arr) {
     if (arr.length === 0) {
@@ -28,6 +28,7 @@ const Analysis = ({data, diaryid}) => {
     useEffect(() => {
         setRecommendArr(recommend.sort(() => Math.random() - 0.5).slice(0, 3));
     }, []);
+    
     return (
         <Container>
             <div className="analysis-emotion">

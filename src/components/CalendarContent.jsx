@@ -9,10 +9,16 @@ const CalendarContent = ({today}) => {
     const formattedTodays = `${today.getMonth() + 1}월 ${today.getDate()}일의 이야기`;
     const [diaryData, setDiaryData] = useState([]);
     const [diaryNum, setDiaryNum] = useState(0);
+    const [fadeClass, setFadeClass] = useState("");
     
     useEffect(() => {
         handleGetDailyDiary();
     }, [today])
+    useEffect(() => {
+        setFadeClass("fade-in");
+        const timer = setTimeout(() => setFadeClass(""), 500); 
+        return () => clearTimeout(timer);
+    }, [today, diaryNum])
 
     const handleGetDailyDiary = async () => {
         try {
@@ -39,7 +45,7 @@ const CalendarContent = ({today}) => {
             <div className="header">
                 {formattedTodays}
             </div>
-            <div className="text">
+            <div className={`text ${fadeClass}`}>
                 {
                     diaryData.length === 0 ? "" : diaryData[diaryNum].diary.content
                 }
