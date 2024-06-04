@@ -12,6 +12,7 @@ import StatisticsPage from './pages/StatisticsPage';
 import WritingPage from './pages/WritingPage';
 import CalendarDetailPage from './pages/CalendarDetailPage';
 import CalendarAnalysisPage from './pages/CalendarAnalysisPage';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <BrowserRouter>
+          
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/calendar" element={<CalendarPage />} />
@@ -38,6 +40,7 @@ function App() {
               <Route path="/writing" element={<WritingPage />} />
             </Route>
           </Routes>
+          
         </BrowserRouter>
       </ThemeProvider>
     </>

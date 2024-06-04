@@ -53,6 +53,24 @@ const GlobalStyles = createGlobalStyle`
         min-width: 1440px;
         min-height: 810px;
     }
+    .fade-enter {
+    opacity: 0;
+    z-index: 1;
+    }
+
+    .fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+    }
+
+    .fade-exit {
+    opacity: 1;
+    }
+
+    .fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 200ms ease-in;
+    }
 `;
 
 export default GlobalStyles;
