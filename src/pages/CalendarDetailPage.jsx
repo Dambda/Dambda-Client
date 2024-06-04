@@ -109,7 +109,7 @@ const CalendarDetailPage = () => {
           </button>
         </div>
         {
-          viewType ? 
+          (viewType && diaryData.length !== 0) ? 
           <Analysis data={diaryData} diaryid={diaryNum}/> : 
           <div>
             <div className="calendardetail_diarytext">
