@@ -4,6 +4,8 @@ import Container from '../styles/pages/calendardetailpage';
 import WidgetSVG from '@/assets/icon/btnwidget-icon.svg?react';
 import LeftSVG from '@/assets/icon/left-icon.svg?react';
 import MenuSVG from '@/assets/icon/menuball-icon.svg?react';
+import OrderSVG from "@/assets/icon/order.svg?react";
+import Analysis from '../components/calendar/Analysis';
 
 import { getDiaryToDate, getDiaryComment, postDiaryComment } from '../apis/diary';
 
@@ -23,7 +25,7 @@ const CalendarDetailPage = () => {
   const [commentData, setCommentData] = useState([]);
 
   const [commentText, setCommentText] = useState("");
-
+  const [viewType, setViewType] = useState(false);
   const today = location.pathname.split("/")[3].split(".");
   const formattedDate = `${today[1] < 10 ? "0"+today[1] : today[1]}월 ${today[2] < 10 ? "0"+today[2] : today[2]}일`
   
@@ -96,37 +98,43 @@ const CalendarDetailPage = () => {
             </ul>
           </div>
 
-          <button className="calendardetail_header--right-btn">
-            분석 보기
-            <WidgetSVG />
+          <button className="calendardetail_header--right-btn" onClick={() => setViewType((prev) => !prev)}>
+            {
+              viewType ? "일기보기" : "분석보기"
+            }
+            {
+              viewType ? <OrderSVG/> : <WidgetSVG/>
+            }
           </button>
         </div>
-          
-        <div className="calendardetail_diarytext">
-          {
-            diaryData.length === 0 ? "" : diaryData[diaryNum].diary.content
-          }
-        </div>
-
-        <div className="calendardetail_comments">
-          <div className="calendardetail_comments_commentlist">
-            {
-              commentData.length !== 0 && commentData.map((value, index) => {
-                  const createdDate = new Date(value.createdAt);
-                  return (
-                    <div className="calendardetail_comments_comment" key={index}>
-                      <div className="calendardetail_comments_comment--header">
-                        <span>{`${createdDate.getFullYear()}.${createdDate.getMonth() + 1}.${createdDate.getDate()}  ${createdDate.getHours()}:${createdDate.getMinutes()}`}</span>
-                        <MenuSVG />
-                      </div>
-                      <div className="calendardetail_comments_comment--content">
-                        {value.content}
-                      </div>
-                    </div>
-                  );
-              })
-            }
-                
+        {
+          viewType ? 
+          <Analysis data={diaryData} diaryid={diaryNum}/> : 
+          <div>
+            <div className="calendardetail_diarytext">
+              {
+                diaryData.length === 0 ? "" : diaryData[diaryNum].diary.content
+              }
+            </div>
+            <div className="calendardetail_comments">
+              <div className="calendardetail_comments_commentlist">
+                {
+                  commentData.length !== 0 && commentData.map((value, index) => {
+                      const createdDate = new Date(value.createdAt);
+                      return (
+                        <div className="calendardetail_comments_comment" key={index}>
+                          <div className="calendardetail_comments_comment--header">
+                            <span>{`${createdDate.getFullYear()}.${createdDate.getMonth() + 1}.${createdDate.getDate()}  ${createdDate.getHours()}:${createdDate.getMinutes()}`}</span>
+                            <MenuSVG />
+                          </div>
+                          <div className="calendardetail_comments_comment--content">
+                            {value.content}
+                          </div>
+                        </div>
+                      );
+                  })
+                }
+                    
               
           </div>
           <div className="calendardetail_comments_write">
@@ -147,6 +155,9 @@ const CalendarDetailPage = () => {
             </div>
           </div>
         </div>
+          </div>
+        }
+        
       </div>
     </Container>
   );
