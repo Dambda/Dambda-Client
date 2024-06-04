@@ -1,6 +1,22 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const load = keyframes`
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+`;
+
+  
+
 
 const Container = styled.div`
+    animation: 0.6s ease-in-out ${load};
+    .fade-in {
+    animation: 0.5s ease-in-out ${load};
+    }
     width: 450px;
     height: 400px;
     background-color: #F4F7FF;
@@ -17,6 +33,7 @@ const Container = styled.div`
         text-align: center;
     }
     & .text {
+        height: 180px;
         padding: 0px 20px;
         font-size: 16px;
         font-weight: 300;
@@ -27,7 +44,8 @@ const Container = styled.div`
         word-break: break-word;
         display: -webkit-box;
         -webkit-line-clamp: 6; // 원하는 라인수
-        -webkit-box-orient: vertical
+        -webkit-box-orient: vertical;
+        
     }
     & ul {
         display: flex;

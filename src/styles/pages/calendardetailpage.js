@@ -63,6 +63,7 @@ const Container = styled.div`
     .calendardetail_comments {
         width: 100%;
         padding: 20px 0px;
+        margin-top: 40px;
         border-top: 1px solid #EAEAEA;
 
         display: flex;
