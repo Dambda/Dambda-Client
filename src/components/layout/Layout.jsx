@@ -3,6 +3,8 @@ import Menu from "./menu/Menu";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import { Outlet,useLocation } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 
 const Layout = () => {
     const [isShowMenu, setIsShowMenu] = useState("show");
@@ -15,6 +17,7 @@ const Layout = () => {
     const [isFold, setIsFold] = useState(parseFold);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const locationCheck = location.pathname.split("/");
         if(locationCheck[1] === "writing"){
             setIsShowMenu("none")
@@ -31,6 +34,8 @@ const Layout = () => {
     }, [location])
     return (
         <>
+            <TransitionGroup>
+            <CSSTransition key={location.key} timeout={300} classNames="fade">
             <div style={{display : "flex", width : "100%"}}>
                 {isShowMenu === "show" && <Menu isFold={isFold} setFold={setIsFold}/>}
                 <div style={{width : "100%", backgroundColor : "#F8F8F6"}}>
@@ -41,6 +46,8 @@ const Layout = () => {
                     </div>
                 </div>
             </div>
+            </CSSTransition>
+            </TransitionGroup>
         </>
     );
 }
