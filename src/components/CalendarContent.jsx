@@ -38,7 +38,8 @@ const CalendarContent = ({today}) => {
         <Container onClick={() => {
             diaryData.length !== 0 && navigate(`/calendar/detail/${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`, {
                 state : {
-                    diaryNum
+                    diaryNum,
+                    viewtype : false
                 }
             })
             }}>

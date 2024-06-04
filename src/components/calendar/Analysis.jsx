@@ -14,17 +14,27 @@ function findIndexOfMax(arr) {
     if (arr.length === 0) {
         return -1; 
     }
-    const indexOfMax = arr.reduce((maxIndex, currentValue, currentIndex, array) => {
-        return currentValue > array[maxIndex] ? currentIndex : maxIndex;
-    }, 0);
+    let maxIndex = 0;
+    let secondMaxIndex = -1;
 
-    return indexOfMax;
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > arr[maxIndex]) {
+            secondMaxIndex = maxIndex;
+            maxIndex = i;
+        } else if (arr[i] !== arr[maxIndex]) {
+            if (secondMaxIndex === -1 || arr[i] > arr[secondMaxIndex]) {
+                secondMaxIndex = i;
+            }
+        }
+    }
+
+    return [maxIndex, secondMaxIndex];
 }
 
 const Analysis = ({data, diaryid}) => {
     const [emotionType, setEmotionType] = useState(0);
     const [recommendArr, setRecommendArr] = useState([]);
-    const characterIndex = (findIndexOfMax(Object.values(data[diaryid].diary.values)))
+    const characterIndex = findIndexOfMax(Object.values(data[diaryid].diary.values))
     useEffect(() => {
         setRecommendArr(recommend.sort(() => Math.random() - 0.5).slice(0, 3));
     }, []);
@@ -34,11 +44,11 @@ const Analysis = ({data, diaryid}) => {
             <div className="analysis-emotion">
                 <div style={{width : "144px", height : "144px", display : "flex", justifyContent : "center", position : "relative"}}>
                 {
-                    emotionType === 0 ? <img src={EmotionCharacters[characterIndex]}/> : <img src={Face}/>
+                    emotionType === 0 ? <img src={EmotionCharacters[characterIndex[0]]}/> : <img src={EmotionCharacters[characterIndex[1]]}/>
                 }
                 <div className="chat">
                 {
-                    "이 날은 "+EmotionText[characterIndex]+" 감정이 조금"
+                    emotionType=== 0 ? "이 날은 "+EmotionText[characterIndex[0]]+" 감정이 조금" : "이 날은 "+EmotionText[characterIndex[1]]+" 감정이 조금"
                 }
                 <br>
                 </br>

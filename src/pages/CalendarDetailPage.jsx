@@ -31,6 +31,7 @@ const CalendarDetailPage = () => {
   
   useEffect(() => {
     setDiaryNum(location.state.diaryNum);
+    setViewType(location.state.viewtype);
     handleGetDailyDiary();
   }, [])
 
