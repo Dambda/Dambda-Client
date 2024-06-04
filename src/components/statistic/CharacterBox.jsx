@@ -17,7 +17,7 @@ const ImgArr = [{
     color : "#C9E5F1"
 },
 {
-    text : "분노",
+    text : "분노군",
     img : Angry,
     color : "#F7D6DF"
 },
