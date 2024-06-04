@@ -7,12 +7,18 @@ const CardContainer = styled.div`
     height: 310px;
     flex: 0 0 auto;
     border-radius: 8px;
-    background-color: black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    
+    .img-box {
+        width: 100%;
+        height: 190px;
+        background-image: url(${(props) => props.img});
+        background-size: cover;
+        background-position: center;
+        border-radius: 5px 5px 0px 0px;
+    }
     .content {
         height: 120px;
         background-color: white;
@@ -56,11 +62,11 @@ const CardContainer = styled.div`
     }
 `;
 
-const OtherContent = ({type = "AAA", content = "피곤했던 하루, 30분동안 편하게 있어요"}) => {
+const OtherContent = ({type = "", content = "", img}) => {
     return (
-        <CardContainer>
-            <div>
-                ss
+        <CardContainer img={img}>
+            <div className="img-box">
+                
             </div>
             <div className="content">
                 <div className="content-textbox">

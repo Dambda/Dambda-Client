@@ -7,7 +7,8 @@ const CardContainer = styled.div`
     flex: 0 0 auto;
     padding: 16px;
     border-radius: 20px;
-    background-color: black;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0)), url(${(props) => props.imgsrc});
+    background-size: cover;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -24,9 +25,9 @@ const CardContainer = styled.div`
     }
 `;
 
-const ContentCard = ({head, company, days, view}) => {
+const ContentCard = ({head, company, days, view, img}) => {
     return (
-        <CardContainer>
+        <CardContainer imgsrc={img}>
             <span>
                 {head}
             </span>
