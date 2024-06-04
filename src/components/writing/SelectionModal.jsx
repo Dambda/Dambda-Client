@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
-import { getID } from '@/apis/api';
+import { getID, getAnaylsis } from '@/apis/api';
+import { getDiaryToDate } from '../../apis/diary';
+
 
 const SelectionModal = ({ onClick, content }) => {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const SelectionModal = ({ onClick, content }) => {
   const [emotionInputView, setEmotionInputView] = useState(false);
   const [topicInputView, setTopicInputView] = useState(false);
   const [id, setID] = useState(-1);
+  const [diaryNum, setDiaryNum] = useState(0);
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [selectedTopics, setSelectedTopics] = useState([]);
   const clickClosedBtn = () => {
@@ -69,13 +72,25 @@ const SelectionModal = ({ onClick, content }) => {
   };
 
   useEffect(() => {
-    if (id !== -1) {
-      navigate('/calendar/analysis', {
-        state: {
-          id: id,
-        },
-      });
-    }
+    const fetchTodayIds = async () => {
+      if (id !== -1) {
+        try {
+          const today = new Date();
+          const num = await handleGetTodayIds(); 
+
+          navigate(`/calendar/detail/${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`, {
+            state : {
+                diaryNum : num,
+                viewtype : true
+            }
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+  
+    fetchTodayIds(); 
   }, [id]);
 
   useEffect(() => {
@@ -87,6 +102,21 @@ const SelectionModal = ({ onClick, content }) => {
     );
   }, [emotionKeyword, topicKeyword]);
 
+  const handleGetTodayIds = async () => {
+    try {
+        const today = new Date();
+        const response = await getDiaryToDate({year : today.getFullYear(), month : today.getMonth() + 1, date : today.getDate()});
+        if(response.length !== 0){
+            let idArr = [];
+            response.forEach(element => {
+              idArr.push(element.diary.id);
+            });
+            return(idArr.findIndex((value) => value === id))
+        }
+    } catch(e) {
+        console.error(e);
+    }
+}
   return (
     <Styled.Container>
       <Styled.SelectionContainer
