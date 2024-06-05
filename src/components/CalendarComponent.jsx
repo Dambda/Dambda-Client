@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react"
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import StyledCalendar from "../styles/components/calendar";
-
-import sadPNG from "@/assets/sad.png";
+import happyPNG from "@/assets/emotion-character/happiness-small.svg";
 import EmotionSVG from "@/assets/icon/emotion-icon.svg?react";
 import NumberSVG from "@/assets/icon/number10-icon.svg?react";
 
@@ -49,7 +48,7 @@ const CalendarComponent = ({today, setToday}) => {
                     if(view === "month"){
                         const dateString = date.getDate().toString();
                         if(diaryData.includes(dateString) && isEmotion){
-                            return <img src={sadPNG}></img>
+                            return <img src={happyPNG}></img>
                         }
                     }
                 }} 
