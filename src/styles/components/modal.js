@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
-import addBtn from '@/assets/icon/modal-add-btn.svg';
 
 const Container = styled.div`
   position: fixed;
@@ -149,7 +148,9 @@ const SelectionContainer = styled(ContentContainer)`
       height: 32px;
       border: 1px solid ${theme.color.primary};
       border-radius: 300px;
-      background-image: url(${addBtn});
+      display : flex;
+      justify-content : center;
+      align-items : center;
       background-repeat: no-repeat;
       background-position: center center;
       background-color: ${theme.color.white};
