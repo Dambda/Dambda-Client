@@ -5,6 +5,7 @@ import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
 import { getID, getAnaylsis } from '@/apis/api';
 import { getDiaryToDate } from '../../apis/diary';
+import BtnSVG from "@/assets/icon/modal-add-btn.svg?react";
 
 
 const SelectionModal = ({ onClick, content }) => {
@@ -151,7 +152,9 @@ const SelectionModal = ({ onClick, content }) => {
                     className="add-btn"
                     type="button"
                     onClick={addEmotionKeyword}
-                  />
+                  >
+                    <BtnSVG/>
+                  </button>
                   {emotionInputView && (
                     <input placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요" />
                   )}
@@ -175,7 +178,9 @@ const SelectionModal = ({ onClick, content }) => {
                     className="add-btn"
                     type="button"
                     onClick={addTopicKeyword}
-                  />
+                  >
+                    <BtnSVG/>
+                  </button>
                   {topicInputView && (
                     <input
                       className="topic-input"
