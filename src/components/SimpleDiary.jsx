@@ -1,17 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Conatiner from "../styles/components/simplediary";
 import TwowayBtn from "./TwowayBtn";
 import CommentSVG from "@/assets/icon/comment-icon.svg?react";
 
 const SimpleDiary = ({width = 1000, height = 200, fontSize = 16, text = "", commentCount = 0, diaryNum = 0}) => {
     const navigation = useNavigate();
+    const location = useLocation();
     const onClickDetailBtn = () => {
         const today = new Date();
         if(diaryNum != null){
-            console.log(diaryNum)
             navigation(`calendar/detail/${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`, {
                 state : {
-                    diaryNum
+                    diaryNum,
+                    prevpath : location.pathname
                 }
             })
         }

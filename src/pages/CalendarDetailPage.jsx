@@ -83,13 +83,20 @@ const CalendarDetailPage = () => {
     }
     setCommentText("");
   }
+  const handleBackBtn = () => {
+    if(location.state.prevpath){
+      navigate(-1);
+    } else {
+      navigate('/calendar')
+    }
+  }
 
   return (
     <Container>
       <div className="wrap">
         <div className="calendardetail_header">
           <div className="calendardetail_header--left">
-            <LeftSVG onClick={() => navigate(-1)} />
+            <LeftSVG onClick={handleBackBtn} />
             <h3>{`${formattedDate} ${numToKr[diaryNum]} 일기`}</h3>
             <ul>
               {
