@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Styled from '@/styles/components/modal';
 import closedBtn from '@/assets/icon/menu/template-closed-btn.svg';
 import SelectionList from './SelectionList';
-import { getID, getAnaylsis } from '@/apis/api';
+import { getID, getAnaylsis, getEmotionString } from '@/apis/api';
 import { getDiaryToDate } from '../../apis/diary';
-import BtnSVG from "@/assets/icon/modal-add-btn.svg?react";
-
+import BtnSVG from '@/assets/icon/modal-add-btn.svg?react';
 
 const SelectionModal = ({ onClick, content }) => {
   const navigate = useNavigate();
@@ -28,6 +27,11 @@ const SelectionModal = ({ onClick, content }) => {
   const [diaryNum, setDiaryNum] = useState(0);
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [selectedTopics, setSelectedTopics] = useState([]);
+  const [emotionInputValue, setEmotionInputValue] = useState('');
+  const [topicInputValue, setTopicInputValue] = useState('');
+  const [emotionDropdown, setEmotionDropdown] = useState(false);
+  const [topicDropdown, setTopicDropdown] = useState(false);
+
   const clickClosedBtn = () => {
     onClick(false);
   };
@@ -67,31 +71,62 @@ const SelectionModal = ({ onClick, content }) => {
     }
   };
 
-  const moveToAnalysisPage = () => {
-    // 키워드 한꺼번에 모아서 보내기
-    idLoad(selectedEmotions, selectedTopics);
+  const handleEmotionInput = async (e) => {
+    const inputValue = e.target.value;
+    const response = await getEmotionString(inputValue);
+    setEmotionInputValue(response);
+    if (response.emotions.length !== 0) {
+      //해당 키워드 존재
+      setEmotionDropdown(true);
+    } else {
+      // 해당 키워드 미존재
+      setEmotionDropdown(false);
+    }
+    console.log(emotionDropdown);
   };
 
+  const handleGetTodayIds = async () => {
+    try {
+      const today = new Date();
+      const response = await getDiaryToDate({
+        year: today.getFullYear(),
+        month: today.getMonth() + 1,
+        date: today.getDate(),
+      });
+      if (response.length !== 0) {
+        let idArr = [];
+        response.forEach((element) => {
+          idArr.push(element.diary.id);
+        });
+        return idArr.findIndex((value) => value === id);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
   useEffect(() => {
     const fetchTodayIds = async () => {
       if (id !== -1) {
         try {
           const today = new Date();
-          const num = await handleGetTodayIds(); 
+          const num = await handleGetTodayIds();
 
-          navigate(`/calendar/detail/${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`, {
-            state : {
-                diaryNum : num,
-                viewtype : true
-            }
-          });
+          navigate(
+            `/calendar/detail/${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`,
+            {
+              state: {
+                diaryNum: num,
+                viewtype: true,
+              },
+            },
+          );
         } catch (error) {
           console.error(error);
         }
       }
     };
-  
-    fetchTodayIds(); 
+
+    fetchTodayIds();
   }, [id]);
 
   useEffect(() => {
@@ -103,21 +138,10 @@ const SelectionModal = ({ onClick, content }) => {
     );
   }, [emotionKeyword, topicKeyword]);
 
-  const handleGetTodayIds = async () => {
-    try {
-        const today = new Date();
-        const response = await getDiaryToDate({year : today.getFullYear(), month : today.getMonth() + 1, date : today.getDate()});
-        if(response.length !== 0){
-            let idArr = [];
-            response.forEach(element => {
-              idArr.push(element.diary.id);
-            });
-            return(idArr.findIndex((value) => value === id))
-        }
-    } catch(e) {
-        console.error(e);
-    }
-}
+  // useEffect(() => {
+  //   handleEmotionInput();
+  // }, [emotionInputValue, topicInputValue]);
+
   return (
     <Styled.Container>
       <Styled.SelectionContainer
@@ -153,11 +177,16 @@ const SelectionModal = ({ onClick, content }) => {
                     type="button"
                     onClick={addEmotionKeyword}
                   >
-                    <BtnSVG/>
+                    <BtnSVG />
                   </button>
                   {emotionInputView && (
-                    <input placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요" />
+                    <input
+                      onChange={handleEmotionInput}
+                      // value={emotionInputValue}
+                      placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                    />
                   )}
+                  {/* {emotionDropdown && } */}
                 </form>
               </div>
             </div>
@@ -179,7 +208,7 @@ const SelectionModal = ({ onClick, content }) => {
                     type="button"
                     onClick={addTopicKeyword}
                   >
-                    <BtnSVG/>
+                    <BtnSVG />
                   </button>
                   {topicInputView && (
                     <input
@@ -197,7 +226,7 @@ const SelectionModal = ({ onClick, content }) => {
           <button className="unselected-btn">미선택</button>
           <button
             className="selection-complete-btn"
-            onClick={moveToAnalysisPage}
+            onClick={() => idLoad(selectedEmotions, selectedTopics)}
           >
             선택 완료
           </button>
