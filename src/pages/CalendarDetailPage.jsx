@@ -19,7 +19,7 @@ const CalendarDetailPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [diaryNum, setDiaryNum] = useState(0);
+  const [diaryNum, setDiaryNum] = useState(-1);
   const [diaryData, setDiaryData] = useState([]);
   const [diaryId, setDiaryId] = useState([]); 
   const [commentData, setCommentData] = useState([]);
@@ -51,7 +51,10 @@ const CalendarDetailPage = () => {
                 idArr.push(element.diary.id);
               });
               setDiaryId(idArr);
-              handleGetDiaryComment({id : response[diaryNum].diary.id})
+              if(diaryNum === -1)
+                handleGetDiaryComment({id : response[location.state.diaryNum].diary.id})
+              else
+                handleGetDiaryComment({id : response[diaryNum].diary.id});
           }
       } catch(e) {
           console.error(e);
