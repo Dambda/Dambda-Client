@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import deleteIcon from '@/assets/icon/delete.svg';
 
 const Container = styled.div`
   position: fixed;
@@ -174,6 +175,31 @@ const SelectionContainer = styled(ContentContainer)`
       outline: none;
       border-color: ${theme.color.primary};
     }
+
+    .add-keyword {
+      position: relative;
+      top: -40px;
+      left: 10px;
+      display: inline-block;
+      width: 100px;
+      height: 32px;
+      padding: 9px 17px;
+      border-radius: 300px;
+      font-size: 15px;
+      font-weight: 700;
+      background-image: url(${deleteIcon});
+      background-repeat: no-repeat;
+      background-position: 70px center;
+      background-size: 20px;
+      color: ${theme.color.white};
+      background-color: ${theme.color.primary};
+      cursor: pointer;
+    }
+
+    .add-topic-keyword {
+      width: 80px;
+      background-position: 50px center;
+    }
   }
 
   & .buttons {
@@ -217,6 +243,7 @@ const EmotionDropdown = styled.ul`
   align-items: center;
   padding: 10px 0;
   border: 1px solid ${theme.color.primary};
+  border-radius: 7px;
   background-color: white;
   width: 85px;
   gap: 8px;

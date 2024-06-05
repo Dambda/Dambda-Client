@@ -31,6 +31,11 @@ const SelectionModal = ({ onClick, content }) => {
   const [topicInputValue, setTopicInputValue] = useState('');
   const [emotionDropdown, setEmotionDropdown] = useState(false);
 
+  const [isEmotionSubmit, setIsEmotionSubmit] = useState(false);
+  const [submitEmotionValue, setSubmitEmotionValue] = useState('');
+  const [isTopicSubmit, setIsTopicSubmit] = useState(false);
+  const [submitTopicValue, setSubmitTopicValue] = useState('');
+
   const clickClosedBtn = () => {
     onClick(false);
   };
@@ -68,6 +73,21 @@ const SelectionModal = ({ onClick, content }) => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const submitEmotionKeyword = (e) => {
+    e.preventDefault();
+    console.log(e.target.innerText);
+    setEmotionDropdown(false);
+    setIsEmotionSubmit(true);
+    setSubmitEmotionValue(e.target.innerText);
+  };
+  const submitTopicKeyword = (e) => {
+    console.log(e.target[1].value);
+    console.log(e);
+    e.preventDefault();
+    setIsTopicSubmit(true);
+    setSubmitTopicValue(e.target[1].value);
   };
 
   const handleEmotionInput = async (e) => {
@@ -173,7 +193,7 @@ const SelectionModal = ({ onClick, content }) => {
                   col="6"
                   onClick={handleKeywordClick}
                 />
-                <form>
+                <form onSubmit={submitEmotionKeyword}>
                   <button
                     className="add-btn"
                     type="button"
@@ -185,8 +205,20 @@ const SelectionModal = ({ onClick, content }) => {
                     <input
                       onChange={handleEmotionInput}
                       // value={emotionInputValue}
-                      placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                      placeholder={
+                        isEmotionSubmit
+                          ? ''
+                          : '생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요'
+                      }
                     />
+                  )}
+                  {isEmotionSubmit && (
+                    <span
+                      className="add-keyword"
+                      onClick={() => setIsEmotionSubmit(false)}
+                    >
+                      {submitEmotionValue}
+                    </span>
                   )}
                   <Styled.EmotionDropdown
                     view={emotionDropdown}
@@ -212,7 +244,7 @@ const SelectionModal = ({ onClick, content }) => {
                   col="7"
                   onClick={handleKeywordClick}
                 />
-                <form>
+                <form onSubmit={submitTopicKeyword}>
                   <button
                     className="add-btn"
                     type="button"
@@ -223,8 +255,20 @@ const SelectionModal = ({ onClick, content }) => {
                   {topicInputView && (
                     <input
                       className="topic-input"
-                      placeholder="생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
+                      placeholder={
+                        isTopicSubmit
+                          ? ''
+                          : '생각하는 주제가 없다면 +버튼을 눌러서 직접 감정을 추가해주세요'
+                      }
                     />
+                  )}
+                  {isTopicSubmit && (
+                    <span
+                      className="add-keyword add-topic-keyword "
+                      onClick={() => setIsTopicSubmit(false)}
+                    >
+                      {submitTopicValue}
+                    </span>
                   )}
                 </form>
               </div>
