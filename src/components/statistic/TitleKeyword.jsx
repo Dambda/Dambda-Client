@@ -20,7 +20,7 @@ const TitleKeyword = () => {
                         <InfoSVG/>
                     </div>
                     <div className="titlekeyword-info" style={{visibility : showInfo ? "visible" : "hidden"}}>
-                        <span>해당 기간동안 가장 많이 선택한<br></br> 감정 키워드 5종류와 횟수입니다</span>
+                        <span>해당 기간동안 가장 많이 선택한<br/> 주제 키워드 20종류입니다</span>
                     </div>
                 </div>
                 <div className="text-mining">
