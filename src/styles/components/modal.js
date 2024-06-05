@@ -148,9 +148,9 @@ const SelectionContainer = styled(ContentContainer)`
       height: 32px;
       border: 1px solid ${theme.color.primary};
       border-radius: 300px;
-      display : flex;
-      justify-content : center;
-      align-items : center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-repeat: no-repeat;
       background-position: center center;
       background-color: ${theme.color.white};
@@ -208,6 +208,26 @@ const SelectionContainer = styled(ContentContainer)`
   }
 `;
 
+const EmotionDropdown = styled.ul`
+  position: absolute;
+  /* top: 150px; */
+  z-index: 999;
+  display: ${({ view }) => (view ? `flex` : `none`)};
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  border: 1px solid ${theme.color.primary};
+  background-color: white;
+  width: 85px;
+  gap: 8px;
+
+  & li {
+    font-size: 13px;
+    font-weight: 500;
+    color: ${theme.color.primary};
+  }
+`;
+
 const Ul = styled.ul`
   display: grid;
   grid-template-columns: repeat(
@@ -237,4 +257,11 @@ const Li = styled.li`
   cursor: pointer;
 `;
 
-export default { Container, LoadingContainer, SelectionContainer, Ul, Li };
+export default {
+  Container,
+  LoadingContainer,
+  SelectionContainer,
+  EmotionDropdown,
+  Ul,
+  Li,
+};

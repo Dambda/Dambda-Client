@@ -30,7 +30,6 @@ const SelectionModal = ({ onClick, content }) => {
   const [emotionInputValue, setEmotionInputValue] = useState('');
   const [topicInputValue, setTopicInputValue] = useState('');
   const [emotionDropdown, setEmotionDropdown] = useState(false);
-  const [topicDropdown, setTopicDropdown] = useState(false);
 
   const clickClosedBtn = () => {
     onClick(false);
@@ -73,16 +72,23 @@ const SelectionModal = ({ onClick, content }) => {
 
   const handleEmotionInput = async (e) => {
     const inputValue = e.target.value;
-    const response = await getEmotionString(inputValue);
-    setEmotionInputValue(response);
-    if (response.emotions.length !== 0) {
-      //해당 키워드 존재
-      setEmotionDropdown(true);
-    } else {
-      // 해당 키워드 미존재
+
+    if (inputValue === '') {
+      // 입력이 없을 때
+      setEmotionInputValue([]); // 입력창 초기화
       setEmotionDropdown(false);
+    } else {
+      // 입력이 있을 때 데이터 받아오기
+      const response = await getEmotionString(inputValue);
+      setEmotionInputValue(response.emotions);
+
+      if (response.emotions.length === 0) {
+        // 입력 데이터와 일치하는 감정 키워드가 없을 때
+        setEmotionDropdown(false);
+      } else {
+        setEmotionDropdown(true);
+      }
     }
-    console.log(emotionDropdown);
   };
 
   const handleGetTodayIds = async () => {
@@ -138,10 +144,6 @@ const SelectionModal = ({ onClick, content }) => {
     );
   }, [emotionKeyword, topicKeyword]);
 
-  // useEffect(() => {
-  //   handleEmotionInput();
-  // }, [emotionInputValue, topicInputValue]);
-
   return (
     <Styled.Container>
       <Styled.SelectionContainer
@@ -186,7 +188,15 @@ const SelectionModal = ({ onClick, content }) => {
                       placeholder="생각하는 감정이 없다면 +버튼을 눌러서 직접 감정을 추가해주세요"
                     />
                   )}
-                  {/* {emotionDropdown && } */}
+                  <Styled.EmotionDropdown
+                    view={emotionDropdown}
+                    className="emotion-dropdown"
+                  >
+                    {emotionDropdown &&
+                      emotionInputValue.map((item, index) => {
+                        return <li key={index}>{item}</li>;
+                      })}
+                  </Styled.EmotionDropdown>
                 </form>
               </div>
             </div>
