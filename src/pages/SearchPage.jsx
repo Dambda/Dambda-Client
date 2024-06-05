@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '@/styles/pages/searchpage';
+import SearchSVG from "@/assets/icon/search.svg?react";
 
 const SearchPage = () => {
   const emotionKeywords = [
@@ -30,7 +31,12 @@ const SearchPage = () => {
     <Container>
       <header>
         <form>
-          <input placeholder="검색어를 입력해주세요." />
+          <div style={{position : "relative"}}>
+            <span style={{position : "absolute", left : "20px", top : "10px"}}>
+              <SearchSVG/>
+            </span>
+            <input placeholder="검색어를 입력해주세요." />
+          </div>
         </form>
         <h2>
           작성하였던 내용을 바탕으로 찾거나 <br />

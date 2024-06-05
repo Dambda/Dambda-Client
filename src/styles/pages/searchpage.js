@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
-import searchIcon from '@/assets/icon/search.svg';
 
 const Container = styled.div`
   display: flex;
@@ -26,8 +25,6 @@ const Container = styled.div`
       padding: 15px 0 15px 72px;
       border-radius: 200px;
       border: 1px solid #eaeaea;
-      background-image: url(${searchIcon});
-      background-repeat: no-repeat;
       background-position: 24px center;
       background-size: 30px 30px;
     }
