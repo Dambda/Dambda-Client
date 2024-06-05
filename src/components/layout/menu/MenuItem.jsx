@@ -63,8 +63,8 @@ const MenuItem = ({isFold}) => {
             {
                 MenuList.map((listItem, index) => {
                     if(index == 5) return (<Stlyed.MenuHr isfold={isFold.toString()} key={index}/>);
-                    const locCheck = listItem.location == location.pathname.substring(1);
-
+                    const locCheck = listItem.location == location.pathname.split('/')[1];
+                    
                     return(
                         <Stlyed.Item isfold={isFold.toString()} key={index} onClick={() => navigateFunc(listItem.location)} onMouseEnter={() => setHoverIndex(index)} onMouseLeave={() => setHoverIndex(-1)}>
                             <listItem.img className={locCheck || (hoverIndex === index) ? "svgActive" : ""}/>
