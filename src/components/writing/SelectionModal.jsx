@@ -6,6 +6,7 @@ import SelectionList from './SelectionList';
 import { getID, getAnaylsis, getEmotionString } from '@/apis/api';
 import { getDiaryToDate } from '../../apis/diary';
 import BtnSVG from '@/assets/icon/modal-add-btn.svg?react';
+import deleteIcon from '@/assets/icon/delete.svg';
 
 const SelectionModal = ({ onClick, content }) => {
   const navigate = useNavigate();
@@ -84,7 +85,6 @@ const SelectionModal = ({ onClick, content }) => {
   };
   const submitTopicKeyword = (e) => {
     console.log(e.target[1].value);
-    console.log(e);
     e.preventDefault();
     setIsTopicSubmit(true);
     setSubmitTopicValue(e.target[1].value);
@@ -218,6 +218,7 @@ const SelectionModal = ({ onClick, content }) => {
                       onClick={() => setIsEmotionSubmit(false)}
                     >
                       {submitEmotionValue}
+                      <img src={deleteIcon} alt="delete-icon" />
                     </span>
                   )}
                   <Styled.EmotionDropdown
@@ -268,6 +269,7 @@ const SelectionModal = ({ onClick, content }) => {
                       onClick={() => setIsTopicSubmit(false)}
                     >
                       {submitTopicValue}
+                      <img src={deleteIcon} alt="delete-icon" />
                     </span>
                   )}
                 </form>
