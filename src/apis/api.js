@@ -13,6 +13,15 @@ export const getKeyword = async (inputValue) => {
   return response.data;
 };
 
+export const getEmotionString = async (str) => {
+  const response = await instance.get(`/emotion/search?q=${str}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.data;
+};
+
 export const getID = async (emotions, words) => {
   const response = await instance.post(
     '/diaries/write/confirm',

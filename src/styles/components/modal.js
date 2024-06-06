@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import deleteIcon from '@/assets/icon/delete.svg';
 
 const Container = styled.div`
   position: fixed;
@@ -148,9 +149,9 @@ const SelectionContainer = styled(ContentContainer)`
       height: 32px;
       border: 1px solid ${theme.color.primary};
       border-radius: 300px;
-      display : flex;
-      justify-content : center;
-      align-items : center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-repeat: no-repeat;
       background-position: center center;
       background-color: ${theme.color.white};
@@ -173,6 +174,31 @@ const SelectionContainer = styled(ContentContainer)`
     & input:focus {
       outline: none;
       border-color: ${theme.color.primary};
+    }
+
+    .add-keyword {
+      position: relative;
+      top: -40px;
+      left: 10px;
+      display: inline-block;
+      width: 100px;
+      height: 32px;
+      padding: 9px 17px;
+      border-radius: 300px;
+      font-size: 15px;
+      font-weight: 700;
+      background-image: url(${deleteIcon});
+      background-repeat: no-repeat;
+      background-position: 70px center;
+      background-size: 20px;
+      color: ${theme.color.white};
+      background-color: ${theme.color.primary};
+      cursor: pointer;
+    }
+
+    .add-topic-keyword {
+      width: 80px;
+      background-position: 50px center;
     }
   }
 
@@ -208,6 +234,27 @@ const SelectionContainer = styled(ContentContainer)`
   }
 `;
 
+const EmotionDropdown = styled.ul`
+  position: absolute;
+  /* top: 150px; */
+  z-index: 999;
+  display: ${({ view }) => (view ? `flex` : `none`)};
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  border: 1px solid ${theme.color.primary};
+  border-radius: 7px;
+  background-color: white;
+  width: 85px;
+  gap: 8px;
+
+  & li {
+    font-size: 13px;
+    font-weight: 500;
+    color: ${theme.color.primary};
+  }
+`;
+
 const Ul = styled.ul`
   display: grid;
   grid-template-columns: repeat(
@@ -237,4 +284,11 @@ const Li = styled.li`
   cursor: pointer;
 `;
 
-export default { Container, LoadingContainer, SelectionContainer, Ul, Li };
+export default {
+  Container,
+  LoadingContainer,
+  SelectionContainer,
+  EmotionDropdown,
+  Ul,
+  Li,
+};

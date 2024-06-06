@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Styled from '@/styles/pages/calendaranalysispage';
 import backwardBtn from '@/assets/icon/backward-btn.svg';
 import RecommendTodo from '../components/RecommendTodo';
@@ -8,9 +8,11 @@ import sadImg from '@/assets/emotion-character/sadness.png';
 import angerImg from '@/assets/emotion-character/anger.png';
 import anxiousImg from '@/assets/emotion-character/anxiety.png';
 import { getAnaylsis } from '@/apis/api';
+import { getDiaryToDate } from '../apis/diary';
 
 const CalendarAnalysisPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const recommend = [
     {
       index: '투두',
@@ -58,6 +60,9 @@ const CalendarAnalysisPage = () => {
   const [randomNum, setRandomNum] = useState([0, 1, 2]);
   const [data, setData] = useState();
   const [character, setCharacter] = useState(happyImg);
+
+  let dt = new Date();
+  let date = `${dt.getFullYear()}.${dt.getMonth() + 1}.${dt.getDate()}`;
 
   const getMaxEmotion = (emotionValues) => {
     let maxKey = null;
@@ -129,11 +134,26 @@ const CalendarAnalysisPage = () => {
     }
   };
 
+  const handleShowDiaryLoad = async () => {
+    const response = await getDiaryToDate({
+      year: date.split('.')[0],
+      month: date.split('.')[1],
+      date: date.split('.')[2],
+    });
+    console.log(response);
+  };
+
+  const showDiary = () => {
+    handleShowDiaryLoad();
+    navigate(`/calendar/detail/${date}`);
+  };
+
   useEffect(() => {
     const id = location.state.id;
     randomNumSelect();
     handleLoad(id);
   }, []);
+
   return (
     <Styled.Container>
       <header>
@@ -163,7 +183,9 @@ const CalendarAnalysisPage = () => {
             ></li>
           </ul>
         </div>
-        <button className="show-diary">일기 보기</button>
+        <button className="show-diary" onClick={showDiary}>
+          일기 보기
+        </button>
       </header>
 
       <main>

@@ -40,7 +40,7 @@ const Container = styled.div`
     }
 
     h2 {
-      font-size: 25px;
+      font-size: 22px;
       font-weight: 700;
       line-height: 1.3em;
       text-align: center;
